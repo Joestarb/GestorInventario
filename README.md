@@ -1,51 +1,60 @@
-# React + TypeScript + Vite
-
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
 # GestorInventario
+
+This project is a React-based inventory management system built with TypeScript and Vite.
+
+## Technologies Used
+
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- ESLint
+
+## Project Setup
+
+This project uses Vite as a build tool and development server. It's set up with React, TypeScript, and Tailwind CSS for styling.
+
+### Prerequisites
+
+- Node.js
+- npm 
+
+### Installation
+
+1. Clone the repository
+
+2. Navigate to the project directory
+
+3. Install dependencies
+
+### Development
+
+To start the development server:
+
+- _Npm run dev_
+
+This will start the Vite development server, typically at `http://localhost:5173`.
+
+### Building for Production
+
+To build the project for production:
+- _npm run build_
+
+This will generate a `dist` folder with the production build.
+
+## Project Structure
+
+- `src/`: Contains the source code for the application
+- `component/`: Contains ONLY  that were reused 
+- `features/`:Contains de slices from api reqs or something
+- `features/dtos`:This directory contains models from all  the api reqs
+- `features/dtos`:This directory contains models from all reused components  
+- `hooks/`:Contains reused hooks  
+- `pages/`: Contains the pages of the application
+- `public/`: Public assets
+- `index.html`: The main HTML file
+- `vite.config.ts`: Vite configuration
+- `tailwind.config.js`: Tailwind CSS configuration
+- `postcss.config.js`: PostCSS configuration
+- `eslint.config.js`: ESLint configuration
+
