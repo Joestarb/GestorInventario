@@ -1,3 +1,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --background-color: #F1F0F3;
+    --text-color: #03001B;
+  }
+  
+  .dark {
+    --background-color: #191a1d;
+    --text-color: #f5f5f5;
+  }
+  
+  body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Lato', sans-serif;
+  }
+  
+  .dark-components{
+    @apply bg-[#181717]
+  }
+
+  .ligth-components{
+    @apply bg-[#ffff]
+  }
+
+  
