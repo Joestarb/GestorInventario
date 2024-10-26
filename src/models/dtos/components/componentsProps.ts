@@ -1,4 +1,18 @@
-// src/features/dtos/components/InputProps.ts
+
+
+
+export interface ChildrenProps {
+  children: React.ReactNode;
+}
+
+export interface ButtonProps extends ChildrenProps {
+  onClick: () => void;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  className?: string;
+}
+
+
 export interface InputProps {
   label: string;
   type?: string;

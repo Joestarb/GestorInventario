@@ -1,24 +1,43 @@
-// src/App.tsx
-import React from "react";
-import { useAppDispatch, useAppSelector } from "./hooks/useRedux";
-import { increment, decrement } from "./features/counter/counterSlice";
-import Input from "./components/Input";
+import React from 'react';
+import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import Sidebar from './layout/Sidebar';
+import Login from './pages/login/Login';
+import Dashboard from './pages/dashboard/Dashboard';
+import Inventory from './pages/inventory/Inventory';
+import Reports from './pages/reports/Reports';
+import Suppliers from './pages/suppliers/Suppliers';
+import Orders from './pages/orders/Orders';
+import ManageStore from './pages/manageStore/ManageStore';
+import TopBar from './layout/TopBar';
 
-const App: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const count = useAppSelector((state) => state.counter.value);
-
+const Layout: React.FC = () => {
   return (
-    <div>
-      <h1>Count: {count}</h1>
-      <button onClick={() => dispatch(increment())}>Increment</button>
-      <button onClick={() => dispatch(decrement())}>Decrement</button>
-      <Input
-      label ="eso tilin"
-      placeholder="eso tilin"
-      name="eso tilin"
-      />
+    <div className='flex'>
+      <Sidebar />
+      <div className='flex-1 ml-[12%]'>
+        <TopBar />
+        <Outlet />
+      </div>
     </div>
+  );
+};
+const App: React.FC = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+
+        <Route element={<Layout />}>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/inventory" element={<Inventory />} />
+          <Route path="/reports" element={<Reports />} />
+          <Route path="/Suppliers" element={<Suppliers />} />
+          <Route path="/orders" element={<Orders />} />
+          <Route path="/manage-store" element={<ManageStore />} />
+
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
