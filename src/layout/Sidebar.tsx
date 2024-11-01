@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import useLanguage from '../hooks/useLanguage';
 import useTheme from '../hooks/useTheme';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Outlet } from 'react-router-dom';
 import { IoHomeSharp } from "react-icons/io5";
 import { MdOutlineInventory } from "react-icons/md";
 import { BiSolidReport } from "react-icons/bi";
@@ -33,7 +33,7 @@ const LanguageToggleButton: React.FC<LanguageToggleButtonProps> = () => {
                 alt="Bandera"
                 className="w-6 h-4 mt-1"
             />
-            <span className={`${isDarkMode ? 'text-white' : 'text-gray-500'} ml-2`}>
+            <span className={`${isDarkMode ? 'text-white' : 'text-gray-500'} ml-1`}>
                 {language === 'es' ? 'Es' : 'Us'}
             </span>
         </button>
@@ -44,6 +44,8 @@ const Sidebar: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     const { language, translate } = useLanguage();
     const { isDarkMode, toggleTheme } = useTheme();
+    const location = useLocation(); 
+
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
@@ -60,47 +62,59 @@ const Sidebar: React.FC = () => {
                         <img src={logo} alt="Kutty Logo" className="w-12" /> <span className='ml-2 text-xl '>Fluxcore</span>
                     </a>
 
-                    <nav className="text-sm font-medium text-gray-500 p-2 " >
-                        <Link to={"/"}>
-                            <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:cursor-pointer hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href='#'>
+                    <nav className="text-sm font-medium text-gray-500 " >
+                        <Link to="/">
+                            <a className={`flex items-center p-4 transition cursor-pointer  group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}>
                                 <IoHomeSharp className='mr-1 w-4 h-4' />
-                                <span className='font-sans '>{translate('dashboard')}</span>
+                                <span className='font-sans'>{translate('dashboard')}</span>
                             </a>
                         </Link>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}>
-                            <MdOutlineInventory className='mr-1 w-4 h-4' />
-                            <span className='font-sans'>{translate('inventory')}</span>
-                        </a>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
-                            <BiSolidReport className='mr-1 w-4 h-4' />
-                            <span className='font-sans'>{translate('reports')}</span>
-                        </a>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
-                            <PiUserSquareBold className='mr-1 w-4 h-4' />
-                            <span className='font-sans'>{translate('supliers')}</span>
-                        </a>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
-                            <BsFillBoxSeamFill className='mr-1 w-4 h-4' />
-                            <span className='font-sans'>{translate('orders')}</span>
-                        </a>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
-                            <TbCheckupList className='mr-1 w-4 h-4' />
-                            <span className='font-sans'>{translate('manageStore')}</span>
-                        </a>
+                        <Link to={"/inventory"}>
+                            <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${ location.pathname === '/inventory' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}>
+                                <MdOutlineInventory className='mr-1 w-4 h-4' />
+                                <span className='font-sans'>{translate('inventory')}</span>
+                            </a>
+                        </Link>
+                        <Link to={"/reports"}>
+                            <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/reports' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                                <BiSolidReport className='mr-1 w-4 h-4' />
+                                <span className='font-sans'>{translate('reports')}</span>
+                            </a>
+                        </Link>
+                        <Link to={"/suppliers"}>
+                            <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/suppliers' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                                <PiUserSquareBold className='mr-1 w-4 h-4' />
+                                <span className='font-sans'>{translate('supliers')}</span>
+                            </a>
+                        </Link>
+                        <Link to={"/orders"}>
+                            <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/orders' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                                <BsFillBoxSeamFill className='mr-1 w-4 h-4' />
+                                <span className='font-sans'>{translate('orders')}</span>
+                            </a>
+                        </Link>
+                        <Link to={"/manage-store"}>
+                            <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/manage-store' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                                <TbCheckupList className='mr-1 w-4 h-4' />
+                                <span className='font-sans'>{translate('manageStore')}</span>
+                            </a>
+                        </Link>
                     </nav>
 
                     {/* Lista de abajo*/}
-                    <div className="absolute bottom-0 w-full text-sm font-medium text-gray-500 p-4 ">
+                    <div className="absolute bottom-0 w-full text-sm font-medium text-gray-500  ">
                         <hr></hr>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#" onClick={toggleTheme}>
+                        <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200 hover:bg-gray-700' : 'text-gray-500'}`} href="#" onClick={toggleTheme}>
                             <FaSun className='mr-1 w-4 h-4' />
                             <span className='font-sans'>{translate('changeMode')}</span>
                         </a>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                        <Link to={"/setting"}>
+                        <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/setting' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200 hover:bg-gray-700' : 'text-gray-500'}`} href="#">
                             <IoSettingsSharp className='mr-1 w-4 h-4' />
                             <span className='font-sans'>{translate('setting')}</span>
                         </a>
-                        <a className={`flex items-center px-4 py-3 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                        </Link>
+                        <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
                             <MdLogout className='mr-1 w-4 h-4' />
                             <span className='font-sans'>{translate('logout')}</span>
                         </a>
@@ -116,7 +130,7 @@ const Sidebar: React.FC = () => {
                             {/* Boton para movil */}
                             <button onClick={toggleSidebar} className="block md:hidden mr-3">
                                 <span className="sr-only">Menu</span>
-                                <svg className={`w-8 h-7  p-2 flex items-center justify-center bg-gray-200 hover:bg-gray-400 rounded ${isDarkMode ? ' text-black bg-gray-300' : 'text-black'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <svg className={`w-8 h-7  p-2 flex items-center justify-center bg-gray-200 hover:bg-gray-700 rounded ${isDarkMode ? ' text-white bg-gray-800' : 'text-black'}`} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path fillRule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clipRule="evenodd" />
                                 </svg>
                             </button>
@@ -131,25 +145,27 @@ const Sidebar: React.FC = () => {
                         </div>
 
                         <div className="flex items-center">
-                            <LanguageToggleButton language={language}  />
-                            <a href="#" className={`flex text-gray-500 ml-3 ${isDarkMode ? ' text-white' : 'text-gray-500'}`}>
+                            <LanguageToggleButton language={language} />
+                            <a href="#" className={`flex text-gray-500 ml-5 sm:ml-2 ${isDarkMode ? ' text-white' : 'text-gray-500'}`}>
                                 <svg className="shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
                                 </svg>
                             </a>
-                            <a href="#" className="ml-4 avatar avatar-sm">
+                            <a href="#" className="ml-2.5 sm:ml-4 avatar avatar-sm">
                                 <img src={avatar} alt="Photo of Praveen Juge" />
                             </a>
                         </div>
                     </header>
 
                     <div className="p-4">
-                        {/* Aqui va a ir el contenido */}
+                        {/* Cuadro del contenido */}
                         <div className={`-mt-2 border-2 rounded h-screen ${isDarkMode ? ' border-white' : 'border-gray-300'}`}>
+                            {/* Aqui va a ir el contenido */}
+                            <Outlet/>
                         </div>
                     </div>
                 </div>
-                
+
                 {isSidebarOpen && (
                     <div
                         onClick={toggleSidebar}
