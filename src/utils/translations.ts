@@ -3,16 +3,20 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
     es: {
         welcome: 'Bienvenido',
         welcomeMessage: 'Por favor ingreas con tus credenciales',
-        dashboard:"Dashboard",
+        dashboard:"Inicio",
         inventory:"Inventario",
         reports:"Reportes",
-        supliers:"Usuarios",
+        supliers:"Proveedores",
         orders:"Ordenes",
         manageStore:"Supervisar inventario",
         email: "Correo electrónico",
         password: "Contraseña",
         login: "Iniciar Sesión",
-        search: "Buscar"
+        search: "Buscar",
+        logout: "Cerrar Sesión",
+        setting: "Configuración",
+        searchPlaceholder: "Buscar producto, proveedor, orden",
+        changeMode: "Cambiar Modo"
 
     },
     en: {
@@ -27,7 +31,10 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         email: "Email",
         password: "Password",
         login: "login",
-        search: "Search"
-
+        search: "Search",
+        logout: "Logout",
+        changeMode: "Change Mode",
+        setting: "Settings",
+         searchPlaceholder: "Search product, supplier, order"
     },
 };

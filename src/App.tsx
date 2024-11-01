@@ -12,12 +12,8 @@ import TopBar from './layout/TopBar';
 
 const Layout: React.FC = () => {
   return (
-    <div className='flex'>
+    <div >
       <Sidebar />
-      <div className='flex-1 ml-[12%]'>
-        <TopBar />
-        <Outlet />
-      </div>
     </div>
   );
 };
