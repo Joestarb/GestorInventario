@@ -23,3 +23,7 @@ export interface InputProps {
   className?: string; // Para estilos personalizados si se desea
   disabled?: boolean;
 }
+
+export interface LanguageToggleButtonProps {
+  language: string;
+}

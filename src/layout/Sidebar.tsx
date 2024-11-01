@@ -15,17 +15,17 @@ import logo from '../assets/LOGOFLUXCORE1.png'
 import banderaus from "../assets/united_flag.png"
 import banderamx from "../assets/banderamx.jpg"
 import avatar from "../assets/avatar.png"
+import { LanguageToggleButtonProps } from '../models/dtos/components/componentsProps';
 
-interface LanguageToggleButtonProps {
-    language: string;
-    changeLanguage: (lang: string) => void;
-}
 
-const LanguageToggleButton: React.FC<LanguageToggleButtonProps> = ({ language, changeLanguage }) => {
+const LanguageToggleButton: React.FC<LanguageToggleButtonProps> = () => {
+    const { language, changeLanguage } = useLanguage();
+    const { isDarkMode } = useTheme();
+
     const toggleLanguage = () => {
         changeLanguage(language === 'es' ? 'en' : 'es');
     };
-    const { isDarkMode } = useTheme();
+
     return (
         <button onClick={toggleLanguage} className="flex text-gray-500 mr-3 bg-transparent border-0 cursor-pointer">
             <img
@@ -33,13 +33,16 @@ const LanguageToggleButton: React.FC<LanguageToggleButtonProps> = ({ language, c
                 alt="Bandera"
                 className="w-6 h-4 mt-1"
             />
-            <span className={`${isDarkMode ? ' text-white' : 'text-gray-500'}`}>{language === 'es' ? 'Es' : 'Us'}</span>
+            <span className={`${isDarkMode ? 'text-white' : 'text-gray-500'} ml-2`}>
+                {language === 'es' ? 'Es' : 'Us'}
+            </span>
         </button>
     );
 };
+
 const Sidebar: React.FC = () => {
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const { language, changeLanguage, translate } = useLanguage();
+    const { language, translate } = useLanguage();
     const { isDarkMode, toggleTheme } = useTheme();
 
     const toggleSidebar = () => {
@@ -128,7 +131,7 @@ const Sidebar: React.FC = () => {
                         </div>
 
                         <div className="flex items-center">
-                            <LanguageToggleButton language={language} changeLanguage={changeLanguage} />
+                            <LanguageToggleButton language={language}  />
                             <a href="#" className={`flex text-gray-500 ml-3 ${isDarkMode ? ' text-white' : 'text-gray-500'}`}>
                                 <svg className="shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                     <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z" />
