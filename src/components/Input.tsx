@@ -3,10 +3,6 @@ import React from "react";
 import { InputProps } from "../models/dtos/components/componentsProps";
 import useTheme from '../hooks/useTheme';
 
-
-
-
-
 const Input: React.FC<InputProps> = ({
 
   label,
