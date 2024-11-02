@@ -27,3 +27,21 @@ export interface InputProps {
 export interface LanguageToggleButtonProps {
   language: string;
 }
+
+
+export interface WhiteCardProps extends ChildrenProps {
+  title: string;
+  subtitle?: string;
+  isDarkMode: boolean;
+  spanCols?: number; 
+  additionalClasses?: string;
+};
+
+
+export type StatCardProps = {
+  value: string;
+  label: string;
+  percentage: string;
+  percentageColor: 'text-green-500' | 'text-red-500';
+  iconDirection: 'up' | 'down';
+};

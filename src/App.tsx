@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Sidebar from './layout/Sidebar';
 import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
@@ -8,15 +8,18 @@ import Reports from './pages/reports/Reports';
 import Suppliers from './pages/suppliers/Suppliers';
 import Orders from './pages/orders/Orders';
 import ManageStore from './pages/manageStore/ManageStore';
-import TopBar from './layout/TopBar';
+import Settings from './pages/settings/Settings';
 
 const Layout: React.FC = () => {
   return (
-    <div >
-      <Sidebar />
-    </div>
+    <>
+      <div>
+        <Sidebar />
+      </div>
+    </>
   );
 };
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
@@ -27,10 +30,10 @@ const App: React.FC = () => {
           <Route path="/" element={<Dashboard />} />
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/reports" element={<Reports />} />
-          <Route path="/Suppliers" element={<Suppliers />} />
+          <Route path="/suppliers" element={<Suppliers />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/manage-store" element={<ManageStore />} />
-
+          <Route path="/setting" element={<Settings />} />
         </Route>
       </Routes>
     </BrowserRouter>
