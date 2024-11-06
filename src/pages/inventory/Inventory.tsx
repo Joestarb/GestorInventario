@@ -38,7 +38,7 @@ const Inventory: React.FC = () => {
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4 p-2  ">
+          <div className="grid grid-cols-2 max-md:grid-cols-1 gap-4  py-4  ">
             <AcquisitionOverviewInventory
             isDarkMode={isDarkMode}
             />

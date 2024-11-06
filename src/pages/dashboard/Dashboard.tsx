@@ -42,7 +42,7 @@ const Dashboard: React.FC = () => {
           </section>
 
 
-          <div className="grid grid-cols-1 2xl:grid-cols-2 xl:gap-4 my-4 mb-5">
+          <div className="grid grid-cols-1  gap-2 2xl:grid-cols-2 xl:gap-4 my-4 mb-5">
             <LatestCustomers isDarkMode={isDarkMode} />
             <AcquisitionOverview isDarkMode={isDarkMode} />
           </div>

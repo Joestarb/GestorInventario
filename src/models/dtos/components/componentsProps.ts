@@ -48,3 +48,10 @@ export type StatCardProps = {
   percentageColor: 'text-green-500' | 'text-red-500';
   iconDirection: 'up' | 'down';
 };
+
+
+export interface ModalProps extends ChildrenProps  {
+  isOpen: boolean;
+  onClose: () => void;
+  title?: string;
+};
