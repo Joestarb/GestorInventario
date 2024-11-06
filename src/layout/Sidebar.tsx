@@ -1,20 +1,18 @@
 import React, { useState } from 'react';
+import { BiSolidReport } from "react-icons/bi";
+import { BsFillBoxSeamFill } from "react-icons/bs";
+import { FaSun } from "react-icons/fa";
+import { IoHomeSharp, IoSettingsSharp } from "react-icons/io5";
+import { MdLogout, MdOutlineInventory } from "react-icons/md";
+import { PiUserSquareBold } from "react-icons/pi";
+import { TbCheckupList } from "react-icons/tb";
+import { Link, Outlet, useLocation } from 'react-router-dom';
+import avatar from "../assets/avatar.png";
+import banderamx from "../assets/banderamx.jpg";
+import logo from '../assets/LOGOFLUXCORE1.png';
+import banderaus from "../assets/united_flag.png";
 import useLanguage from '../hooks/useLanguage';
 import useTheme from '../hooks/useTheme';
-import { Link, useLocation, Outlet } from 'react-router-dom';
-import { IoHomeSharp } from "react-icons/io5";
-import { MdOutlineInventory } from "react-icons/md";
-import { BiSolidReport } from "react-icons/bi";
-import { PiUserSquareBold } from "react-icons/pi";
-import { BsFillBoxSeamFill } from "react-icons/bs";
-import { TbCheckupList } from "react-icons/tb";
-import { IoSettingsSharp } from "react-icons/io5";
-import { MdLogout } from "react-icons/md";
-import { FaSun } from "react-icons/fa";
-import logo from '../assets/LOGOFLUXCORE1.png'
-import banderaus from "../assets/united_flag.png"
-import banderamx from "../assets/banderamx.jpg"
-import avatar from "../assets/avatar.png"
 import { LanguageToggleButtonProps } from '../models/dtos/components/componentsProps';
 
 
@@ -54,10 +52,10 @@ const Sidebar: React.FC = () => {
 
     return (
         <>
-            <section className={`min-h-screen bg-gray-50 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+            <section className={`min-h-screen  ${isDarkMode ? 'dark-components' : 'ligth-components'}`}>
                 {/* Sidebar */}
                 <nav className={`fixed top-0 left-0 z-20 h-full pb-10 overflow-x-hidden overflow-y-auto transition-transform transform border-r-2 w-60 
-                    ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+                    ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 ${isDarkMode ? 'dark-components' : 'ligth-components'}`}>
                     <a href="#" className="flex items-center px-4 py-5">
                         <img src={logo} alt="Kutty Logo" className="w-12" /> <span className='ml-2 text-xl '>Fluxcore</span>
                     </a>

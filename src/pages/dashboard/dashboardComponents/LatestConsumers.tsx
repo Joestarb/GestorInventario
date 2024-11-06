@@ -1,7 +1,8 @@
 import React from 'react';
 import WhiteCard from '../../../components/WhiteCard';
 
-const LatestCustomers = ({ isDarkMode }) => {
+    const LatestCustomers: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
+
     const customers = [
         { name: "Neil Sims", email: "[email protected]", amount: "$320", img: "https://demo.themesberg.com/windster/images/users/neil-sims.png" },
         { name: "Bonnie Green", email: "[email protected]", amount: "$3467", img: "https://demo.themesberg.com/windster/images/users/bonnie-green.png" },
@@ -16,7 +17,7 @@ const LatestCustomers = ({ isDarkMode }) => {
             isDarkMode={isDarkMode}
             additionalClasses="mb-4 h-full">
             <div className="flex items-center justify-between mb-4">
-                <a href="#" className="text-sm font-medium hover:bg-gray-50 hover:text-black rounded-lg inline-flex items-center p-2">
+                <a href="#" className="text-sm font-medium hover:ligth-components hover:text-black rounded-lg inline-flex items-center p-2">
                     View all
                 </a>
             </div>
