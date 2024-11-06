@@ -1,9 +1,12 @@
 
 
-
+interface Classname{
+  className?: string;
+}
 export interface ChildrenProps {
   children: React.ReactNode;
 }
+
 
 export interface ButtonProps extends ChildrenProps {
   onClick: () => void;
@@ -29,7 +32,7 @@ export interface LanguageToggleButtonProps {
 }
 
 
-export interface WhiteCardProps extends ChildrenProps {
+export interface WhiteCardProps extends ChildrenProps, Classname {
   title: string;
   subtitle?: string;
   isDarkMode: boolean;

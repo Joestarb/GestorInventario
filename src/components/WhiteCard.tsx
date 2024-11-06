@@ -1,10 +1,10 @@
 import React from 'react'
 import { WhiteCardProps } from "../models/dtos/components/componentsProps";
 
-const WhiteCard: React.FC<WhiteCardProps> = ({ title, subtitle, children, isDarkMode, spanCols = 1 }) => {
+const WhiteCard: React.FC<WhiteCardProps> = ({ className,title, subtitle, children, isDarkMode, spanCols = 1 }) => {
     return (
       <div
-        className={`shadow rounded-lg p-4 sm:p-6 xl:p-8 ${spanCols > 1 ? `2xl:col-span-${spanCols}` : ''} ${
+        className={`${className} shadow rounded-lg p-4 sm:p-6 xl:p-8 ${spanCols > 1 ? `2xl:col-span-${spanCols}` : ''} ${
           isDarkMode ? 'bg-gray-700' : 'bg-white'
         }`}
       >

@@ -4,7 +4,7 @@ import React from 'react'
 const SalesAndTransactions: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
 
     return (
-      <div className="w-full grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3 gap-4">
+      <div className="w-full grid grid-cols-[69%_30%] max-md:grid-cols-2 max-sm:grid-cols-1 gap-4  ">
         <WhiteCard
           title="$45,385"
           subtitle="Sales this week"
@@ -27,7 +27,9 @@ const SalesAndTransactions: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode })
           title="Latest Transactions"
           subtitle="This is a list of latest transactions"
           children={
-            <table className=" ">
+            <div className=" overflow-x-auto">
+
+            <table className="  w-full ">
               <thead className={`${isDarkMode ? 'bg-gray-600 ' : 'bg-gray-100'}`}>
                 <tr>
                   <th className="p-4 text-left text-xs font-medium uppercase tracking-wider">Transaction</th>
@@ -44,6 +46,8 @@ const SalesAndTransactions: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode })
                 {/* Repetir más filas de transacciones según sea necesario */}
               </tbody>
             </table>
+            </div>
+
           }
           isDarkMode={isDarkMode}
         />

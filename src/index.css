@@ -19,11 +19,11 @@
   }
   
   .dark-components{
-    @apply bg-[#181717]
+    @apply bg-gray-900
   }
 
   .ligth-components{
-    @apply bg-[#ffff]
+    @apply bg-gray-50
   }
 
   

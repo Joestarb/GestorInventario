@@ -1,14 +1,14 @@
-import React from 'react'
-import useTheme from '../../hooks/useTheme';
-import SalesAndTransactions from './dashboardComponents/SalesAndTransactions';
+import React from 'react';
 import StatCard from '../../components/StatCard';
-import LatestCustomers from './dashboardComponents/LatestConsumers';
+import useTheme from '../../hooks/useTheme';
 import AcquisitionOverview from './dashboardComponents/AcquisitionOverview';
+import LatestCustomers from './dashboardComponents/LatestConsumers';
+import SalesAndTransactions from './dashboardComponents/SalesAndTransactions';
 const Dashboard: React.FC = () => {
   const { isDarkMode } = useTheme();
 
   return (
-    <div className={`h-full w-full bg-gray-50 relative overflow-y-auto ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`h-full w-full relative overflow-y-auto ${isDarkMode ? 'dark-components' : 'ligth-components'}`}>
       <main>
         <div className="pt-6 px-4">
           {/* superior part from component Dashborad show sales and transactions */}
