@@ -156,9 +156,7 @@ const Sidebar: React.FC = () => {
                     </header>
 
                     <div className="p-4">
-                        {/* Cuadro del contenido */}
-                        <div className={`-mt-2 border-2 rounded h-screen ${isDarkMode ? ' border-white' : 'border-gray-300'}`}>
-                            {/* Aqui va a ir el contenido */}
+                        <div className={`-mt-2 border-2 rounded h-screen overflow-auto ${isDarkMode ? ' border-white' : 'border-gray-300'}`}>
                             <Outlet/>
                         </div>
                     </div>
