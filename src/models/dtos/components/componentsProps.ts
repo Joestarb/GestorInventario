@@ -1,5 +1,3 @@
-
-
 interface Classname{
   className?: string;
 }
@@ -54,4 +52,10 @@ export interface ModalProps extends ChildrenProps  {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+};
+
+export interface TableProps<T> {
+  data: T[];
+  headers: (keyof T)[];
+  renderRow?: (row: T) => JSX.Element;
 };
