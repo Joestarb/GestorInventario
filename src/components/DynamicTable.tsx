@@ -12,7 +12,7 @@ function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTablePr
           {headers.map((header, index) => (
             <th
               key={index}
-              className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
             >
               {String(header)}
             </th>
@@ -28,7 +28,7 @@ function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTablePr
               {headers.map((header, colIndex) => (
                 <td
                   key={colIndex}
-                  className="px-6 py-4 whitespace-nowrap text-sm text-gray-900"
+                  className="px-6 py-4 whitespace-nowrap text-sm "
                 >
                   {header === 'status' ? (
                     <span

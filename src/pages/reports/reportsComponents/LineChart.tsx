@@ -28,7 +28,7 @@ const LineChart: React.FC<LineChartProps> = ({ revenueData, profitData, labels, 
   };
 
   const options = {
-    responsive: false,
+    responsive: true,
     plugins: {
       legend: {
         position: 'bottom' as const, // Posición de la leyenda
@@ -71,7 +71,7 @@ const LineChart: React.FC<LineChartProps> = ({ revenueData, profitData, labels, 
   };
 
   return (
-    <div className="  lg:p-10 mx-auto  ">
+    <div className=" w-full lg:p-10 mx-auto  ">
       <Line data={data} options={options} />
     </div>
   );
