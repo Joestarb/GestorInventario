@@ -16,11 +16,6 @@ import WhiteCard from '../../../components/WhiteCard';
             title='Latest Customers'
             isDarkMode={isDarkMode}
             additionalClasses="mb-4 h-full">
-            <div className="flex items-center justify-between mb-4">
-                <a href="#" className="text-sm font-medium hover:ligth-components hover:text-black rounded-lg inline-flex items-center p-2">
-                    View all
-                </a>
-            </div>
             <div className="flow-root">
                 <ul role="list" className="divide-y divide-gray-200">
                     {customers.map((customer, index) => (

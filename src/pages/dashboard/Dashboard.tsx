@@ -9,13 +9,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className={`h-full w-full relative overflow-y-auto ${isDarkMode ? 'dark-components' : 'ligth-components'}`}>
-      <main>
         <div className="pt-6 px-4">
-          {/* superior part from component Dashborad show sales and transactions */}
           <SalesAndTransactions isDarkMode={isDarkMode} />
 
-          {/* middle part from Dashboard show stats from webapp */}
-          <section >
+           {/* middle part from Dashboard show stats from webapp */}
+           <section >
             <div className="mt-4 w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
               <StatCard
                 value="2,340"
@@ -40,14 +38,12 @@ const Dashboard: React.FC = () => {
               />
             </div>
           </section>
-
-
-          <div className="grid grid-cols-1  gap-2 2xl:grid-cols-2 xl:gap-4 my-4 mb-5">
-            <LatestCustomers isDarkMode={isDarkMode} />
-            <AcquisitionOverview isDarkMode={isDarkMode} />
-          </div>
+          
+        <div className="grid grid-cols-1  gap-2 2xl:grid-cols-2 xl:gap-4 my-4 mb-5">
+          <LatestCustomers isDarkMode={isDarkMode} />
+          <AcquisitionOverview isDarkMode={isDarkMode} />
         </div>
-      </main>
+        </div>
     </div>
   )
 }
