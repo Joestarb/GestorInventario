@@ -39,10 +39,10 @@ const Inventory: React.FC = () => {
           </div>
 
           <div className="grid grid-cols-2 max-md:grid-cols-1 gap-4  py-4  ">
-            <AcquisitionOverviewInventory
+          <LatestCustomers
             isDarkMode={isDarkMode}
             />
-            <LatestCustomers
+            <AcquisitionOverviewInventory
             isDarkMode={isDarkMode}
             />
           </div>

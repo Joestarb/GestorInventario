@@ -38,6 +38,7 @@ export interface WhiteCardProps extends ChildrenProps, Classname {
   isDarkMode: boolean;
   spanCols?: number; 
   additionalClasses?: string;
+  headerActions?: React.ReactNode;
 };
 
 
