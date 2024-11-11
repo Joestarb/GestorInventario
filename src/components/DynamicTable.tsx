@@ -8,17 +8,18 @@ function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTablePr
   return (
     <table className={`min-w-full   rounded-lg overflow-hidden ${className}`}>
       <thead>
-        <tr className=" border-b">
+        <tr className="border-b">
           {headers.map((header, index) => (
             <th
               key={index}
-              className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+              className={`px-6 py-3 text-sm font-medium tracking-wider ${header === 'Actions' ? 'text-center' : 'text-left'}`}
             >
               {String(header)}
             </th>
           ))}
         </tr>
       </thead>
+
       <tbody>
         {data.map((item, rowIndex) => (
           renderRow ? (
@@ -36,10 +37,10 @@ function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTablePr
                         item[header] === 'Delayed'
                           ? 'text-red-500 font-semibold'
                           : item[header] === 'Confirmed'
-                          ? 'text-blue-500 font-semibold'
-                          : item[header] === 'Returned'
-                          ? 'text-gray-500 font-semibold'
-                          : 'text-green-500 font-semibold'
+                            ? 'text-blue-500 font-semibold'
+                            : item[header] === 'Returned'
+                              ? 'text-gray-500 font-semibold'
+                              : 'text-green-500 font-semibold'
                       }
                     >
                       {String(item[header])}

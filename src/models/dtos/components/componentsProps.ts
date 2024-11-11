@@ -7,7 +7,7 @@ export interface ChildrenProps {
 
 
 export interface ButtonProps extends ChildrenProps {
-  onClick: () => void;
+  onClick?: () => void;
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;
