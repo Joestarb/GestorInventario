@@ -6,6 +6,7 @@ import Dashboard from './pages/dashboard/Dashboard';
 import Inventory from './pages/inventory/Inventory';
 import Reports from './pages/reports/Reports';
 import Suppliers from './pages/suppliers/Suppliers';
+import Details from './pages/suppliers/Details';
 import Orders from './pages/orders/Orders';
 import ManageStore from './pages/manageStore/ManageStore';
 import Settings from './pages/settings/Settings';
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <Route path="/inventory" element={<Inventory />} />
           <Route path="/reports" element={<Reports />} />
           <Route path="/suppliers" element={<Suppliers />} />
+          <Route path="/suppliers/details/:name" element={<Details />} /> 
           <Route path="/orders" element={<Orders />} />
           <Route path="/manage-store" element={<ManageStore />} />
           <Route path="/setting" element={<Settings />} />
