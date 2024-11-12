@@ -1,14 +1,15 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Sidebar from './layout/Sidebar';
-import Login from './pages/login/Login';
 import Dashboard from './pages/dashboard/Dashboard';
 import Inventory from './pages/inventory/Inventory';
-import Reports from './pages/reports/Reports';
-import Suppliers from './pages/suppliers/Suppliers';
-import Orders from './pages/orders/Orders';
+import ProductDetail from './pages/inventory/ProductDetail';
+import Login from './pages/login/Login';
 import ManageStore from './pages/manageStore/ManageStore';
+import Orders from './pages/orders/Orders';
+import Reports from './pages/reports/Reports';
 import Settings from './pages/settings/Settings';
+import Suppliers from './pages/suppliers/Suppliers';
 
 const Layout: React.FC = () => {
   return (
@@ -34,6 +35,7 @@ const App: React.FC = () => {
           <Route path="/orders" element={<Orders />} />
           <Route path="/manage-store" element={<ManageStore />} />
           <Route path="/setting" element={<Settings />} />
+          <Route path="/products" element={<ProductDetail />} />
         </Route>
       </Routes>
     </BrowserRouter>
