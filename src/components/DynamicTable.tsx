@@ -2,21 +2,23 @@ import { TableProps } from "../models/dtos/components/componentsProps";
 
 type DynamicTableProps<T> = TableProps<T> & {
   className?: string;
+  renderActions?: (item: T) => React.ReactNode;
 };
 
-function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTableProps<T>) {
+function DynamicTable<T>({ data, headers, renderRow, className, renderActions }: DynamicTableProps<T>) {
   return (
-    <table className={`min-w-full   rounded-lg overflow-hidden ${className}`}>
+    <table className={`min-w-full rounded-lg overflow-hidden ${className}`}>
       <thead>
-        <tr className=" border-b">
+        <tr className="border-b">
           {headers.map((header, index) => (
             <th
               key={index}
-              className="px-6 py-3 text-left text-xs font-medium  uppercase tracking-wider"
+              className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
             >
               {String(header)}
             </th>
           ))}
+          {renderActions && <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Actions</th>}
         </tr>
       </thead>
       <tbody>
@@ -28,14 +30,14 @@ function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTablePr
               {headers.map((header, colIndex) => (
                 <td
                   key={colIndex}
-                  className="px-6 py-4 whitespace-nowrap text-sm "
+                  className="px-6 py-4 whitespace-nowrap text-sm"
                 >
                   {header === 'status' ? (
                     <span
                       className={
-                        item[header] === 'Delayed'
+                        item[header] === 'Out of Stock'
                           ? 'text-red-500 font-semibold'
-                          : item[header] === 'Confirmed'
+                          : item[header] === 'less than 10'
                           ? 'text-blue-500 font-semibold'
                           : item[header] === 'Returned'
                           ? 'text-gray-500 font-semibold'
@@ -49,6 +51,11 @@ function DynamicTable<T>({ data, headers, renderRow, className }: DynamicTablePr
                   )}
                 </td>
               ))}
+              {renderActions && (
+                <td className="px-6 py-4 whitespace-nowrap text-sm">
+                  {renderActions(item)}
+                </td>
+              )}
             </tr>
           )
         ))}
