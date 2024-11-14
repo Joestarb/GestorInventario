@@ -42,7 +42,13 @@ function DynamicTable<T>({ data, headers, renderRow, className, renderActions }:
                           ? 'text-blue-500 font-semibold'
                           : item[header] === 'Returned'
                           ? 'text-gray-500 font-semibold'
-                          : 'text-green-500 font-semibold'
+                          : item[header] === 'Delayed'
+                          ? 'text-yellow-500 font-semibold'
+                          : item[header] === 'Confirmed'
+                          ? 'text-blue-500 font-semibold'
+                          : item[header] === 'Out for delivery'
+                          ? 'text-green-500 font-semibold'
+                          : 'text-gray-500 font-semibold'
                       }
                     >
                       {String(item[header])}

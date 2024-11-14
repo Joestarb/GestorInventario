@@ -17,7 +17,7 @@ const WhiteCard: React.FC<WhiteCardProps> = ({
         </div>
         {headerActions && <div>{headerActions}</div>}
       </div>
-      <div>{children}</div>
+      <div className='overflow-x-auto'>{children}</div>
     </div>
   );
 };

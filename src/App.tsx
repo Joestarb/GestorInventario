@@ -10,6 +10,7 @@ import Orders from './pages/orders/Orders';
 import Reports from './pages/reports/Reports';
 import Settings from './pages/settings/Settings';
 import Suppliers from './pages/suppliers/Suppliers';
+import Landing from './pages/landing/Landing';
 
 const Layout: React.FC = () => {
   return (
@@ -26,6 +27,7 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/landing" element={<Landing/>}/>
 
         <Route element={<Layout />}>
           <Route path="/" element={<Dashboard />} />
