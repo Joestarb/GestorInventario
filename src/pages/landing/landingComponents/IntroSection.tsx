@@ -8,6 +8,7 @@ import StarOne from '../../../assets/star 1.png';
 import StarTwo from '../../../assets/star 2.png';
 import StarThree from '../../../assets/star 3.png';
 import Logo from '../../../assets/LOGOFLUXCORE1.png';
+import { Link } from 'react-router-dom';
 
 const IntroSection: React.FC = () => {
   const [bgStyles, setBgStyles] = useState({
@@ -66,7 +67,9 @@ const IntroSection: React.FC = () => {
           "Si buscas una solución para llevar un control preciso de inventarios con métricas <br /> detalladas y una gestión eficiente de proveedores, ¡somos la opción ideal <br /> para optimizar tu operación!"
         </p>
         <button className="text-white bg-gradient-to-r from-[#F66B0E] to-purple-500 h-12 w-32 rounded-2xl">
-          EMPEZAR
+          <Link to="/login">
+            EMPEZAR
+          </Link>
         </button>
       </div>
     </div>

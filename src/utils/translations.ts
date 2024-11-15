@@ -1,7 +1,7 @@
 // utils/translations.ts
 export const translations: Record<'es' | 'en', Record<string, string>> = {
     es: {
-        welcome: 'Bienvenido',
+        welcome: 'Bienvenido a',
         welcomeMessage: 'Por favor ingreas con tus credenciales',
         dashboard:"Inicio",
         inventory:"Inventario",
@@ -20,7 +20,7 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
 
     },
     en: {
-        welcome: 'Welcome',
+        welcome: 'Welcome to',
         welcomeMessage: 'Please enter your credentials',
         dashboard:"Dashboard",
         inventory:"Inventory",

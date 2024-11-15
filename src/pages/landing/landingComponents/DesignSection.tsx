@@ -3,6 +3,7 @@ import Footer from '../../../assets/footer.png';
 import Inventory from '../../../assets/Inventory.png';
 import Dashboard from '../../../assets/Dashboard.png';
 import EclipseBlue from '../../../assets/eclipseblue.png';
+import { Link } from 'react-router-dom';
 
 const DesignSections: React.FC = () => {
     const [bgStyles, setBgStyles] = useState({
@@ -53,8 +54,10 @@ const DesignSections: React.FC = () => {
                 <div className='text-center space-y-5'>
                     <h1 className='text-white font-extrabold text-4xl md:text-5xl lg:text-5xl'>Atención al cliente 24/7</h1>
                     <p className='text-white text-base md:text-base lg:text-lg'>“Exotismo en cada detalle, responsabilidad en cada acción”</p>
-                    <button className='text-white bg-gradient-to-r from-[#F66B0E] to-purple-500 h-12 w-32 rounded-2xl'>
-                        EMPEZAR
+                    <button className="text-white bg-gradient-to-r from-[#F66B0E] to-purple-500 h-12 w-32 rounded-2xl">
+                        <Link to="/login">
+                            EMPEZAR
+                        </Link>
                     </button>
                 </div>
             </div>

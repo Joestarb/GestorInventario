@@ -11,6 +11,7 @@ export interface ButtonProps extends ChildrenProps {
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   className?: string;
+  buttonClassname?: string;
 }
 
 
@@ -21,7 +22,8 @@ export interface InputProps {
   placeholder: string;
   name: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  className?: string; 
+  className?: string;
+  inputClassname?: string;
   disabled?: boolean;
 }
 
