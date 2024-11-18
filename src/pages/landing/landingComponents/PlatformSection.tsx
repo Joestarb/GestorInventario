@@ -41,7 +41,7 @@ const PlatformSection: React.FC = () => {
             window.removeEventListener('resize', handleResize);
             window.addEventListener('orientationchange', handleResize);
         } 
-    })
+    },[])
 
     return (
         <div

@@ -39,7 +39,7 @@ const DesignSections: React.FC = () => {
             window.removeEventListener('resize', handleResize);
             window.removeEventListener('orientationchange', handleResize)
         } 
-    })
+    },[])
     
     return (
         <div className='w-full h-screen'

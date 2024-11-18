@@ -1,8 +1,23 @@
 import React from 'react'
 import LoginForm from './loginComponents/LoginForm';
 import BgLogin from '../../assets/edificio.jpg';
-
+import { useGetRolesQuery } from '../../features/roles/rolesApi';
+import { useEffect, useState } from 'react';
 const Login: React.FC = () => {
+  const { data: rolesData, isLoading, error } = useGetRolesQuery();
+  const [roles, setRoles] = useState<typeof rolesData>([]);
+
+  useEffect(() => {
+    if (rolesData && roles.length === 0) {
+      setRoles(rolesData); // Guarda los roles al cargarlos
+    }
+  }, [rolesData]);
+
+  if (isLoading && roles.length === 0) return <p>Cargando roles...</p>;
+  if (error) return <p>Error al cargar los roles: {JSON.stringify(error)}</p>;
+  
+  console.log(roles)
+ 
   return (
     <div className="flex justify-center items-center h-screen"
       style={{
