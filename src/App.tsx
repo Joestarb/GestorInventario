@@ -12,6 +12,8 @@ import Reports from './pages/reports/Reports';
 import Settings from './pages/settings/Settings';
 import Suppliers from './pages/suppliers/Suppliers';
 import Landing from './pages/landing/Landing';
+import Category from './pages/category/Category';
+import CategoryDetails from './pages/category/categoryComponents/CategoryDetails';
 
 const Layout: React.FC = () => {
   return (
@@ -40,6 +42,9 @@ const App: React.FC = () => {
           <Route path="/manage-store" element={<ManageStore />} />
           <Route path="/setting" element={<Settings />} />
           <Route path="/products" element={<ProductDetail />} />
+          <Route path="/category" element={<Category/>} />
+
+          <Route path="/category/:categoryName" element={<CategoryDetails isDarkMode={false}/>} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -86,7 +86,7 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
                                 ))}
                             </div>
                         </Modal>
-                        <div className=' overflow-auto'>
+                        <div className='overflow-auto'>
                             <DynamicTable  data={orders} headers={headers}/>
                         </div>
                     </>

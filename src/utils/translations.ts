@@ -1,3 +1,5 @@
+import Category from "../pages/category/Category";
+
 // utils/translations.ts
 export const translations: Record<'es' | 'en', Record<string, string>> = {
     es: {
@@ -16,8 +18,8 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         logout: "Cerrar Sesión",
         setting: "Configuración",
         searchPlaceholder: "Buscar producto, proveedor, orden",
-        changeMode: "Cambiar Modo"
-
+        changeMode: "Cambiar Modo",
+        category: "Categoría"
     },
     en: {
         welcome: 'Welcome to',
@@ -35,6 +37,7 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         logout: "Logout",
         changeMode: "Change Mode",
         setting: "Settings",
-         searchPlaceholder: "Search product, supplier, order"
+        searchPlaceholder: "Search product, supplier, order",
+        category: "Category"
     },
 };

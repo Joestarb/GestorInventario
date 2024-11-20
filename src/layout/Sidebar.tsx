@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BiSolidReport } from "react-icons/bi";
+import { BiSolidReport, BiSolidCategory } from "react-icons/bi";
 import { BsFillBoxSeamFill } from "react-icons/bs";
 import { FaSun } from "react-icons/fa";
 import { IoHomeSharp, IoSettingsSharp } from "react-icons/io5";
@@ -96,6 +96,12 @@ const Sidebar: React.FC = () => {
                                 <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/manage-store' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
                                     <TbCheckupList className='mr-1 w-4 h-4' />
                                     <span className='font-sans'>{translate('manageStore')}</span>
+                                </a>
+                            </Link>
+                            <Link to={"/category"}>
+                                <a className={`flex items-center p-4 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/category' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`} href="#">
+                                    <BiSolidCategory className='mr-1 w-4 h-4' />
+                                    <span className='font-sans'>{translate('category')}</span>
                                 </a>
                             </Link>
                         </nav>
