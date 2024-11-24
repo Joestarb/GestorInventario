@@ -5,7 +5,10 @@ import themeReducer from '../features/theme/themeSlice';
 import languageReducer from '../features/language/languageSlice';
 import { authApi } from "../features/Auth/authApi";
 import { rolesApi } from "../features/roles/rolesApi";
-
+import { movementsTypeSlice } from "../features/movementsType/movementsTypeSlice";
+import { clasificationMovementSlice } from "../features/clasification/clasificationMovementSlice";
+import { purchaseOrderSlice } from "../features/order/purchaseOrderSlice";
+import { companiesSlice } from "../features/companies/companiesSlice";
 import { getCategoriesProductsApi } from "../features/Categories/Product/getCategoriesProducts";
 import { createCategoryProductApi } from "../features/Categories/Product/createCategoryProduct";
 import { updateCategoryProductApi } from "../features/Categories/Product/updateCategoryProduct";
@@ -38,6 +41,10 @@ export const store = configureStore({
     language: languageReducer,
     [authApi.reducerPath]: authApi.reducer,
     [rolesApi.reducerPath]: rolesApi.reducer,
+    [movementsTypeSlice.reducerPath]: movementsTypeSlice.reducer,
+    [clasificationMovementSlice.reducerPath]: clasificationMovementSlice.reducer,
+    [purchaseOrderSlice.reducerPath]: purchaseOrderSlice.reducer,
+    [companiesSlice.reducerPath]: companiesSlice.reducer,
 
     // Agregar reducers de las nuevas APIs
     [getCategoriesProductsApi.reducerPath]: getCategoriesProductsApi.reducer,
@@ -66,34 +73,9 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(authApi.middleware)
-      .concat(rolesApi.middleware)
-      // Middleware de las nuevas APIs
-      .concat(getCategoriesProductsApi.middleware)
-      .concat(createCategoryProductApi.middleware)
-      .concat(updateCategoryProductApi.middleware)
-      .concat(deleteCategoryProductApi.middleware)
-      .concat(restoreCategoryProductApi.middleware)
-      .concat(filterByNameCategoryProductApi.middleware)
-      .concat(filterByCompanyNameCategoryProductApi.middleware)
-
-      .concat(getCategoriesPurchaseOrdersApi.middleware)
-      .concat(createCategoryPurchaseOrderApi.middleware)
-      .concat(updateCategoryPurchaseOrderApi.middleware)
-      .concat(deleteCategoryPurchaseOrderApi.middleware)
-      .concat(restoreCategoryPurchaseOrderApi.middleware)
-      .concat(filterByNameCategoryPurchaseOrderApi.middleware)
-      .concat(filterByCompanyNameCategoryPurchaseOrderApi.middleware)
-
-      .concat(getCategoriesSuppliersApi.middleware)
-      .concat(createSupplierApi.middleware)
-      .concat(updateCategorySupplierApi.middleware)
-      .concat(deleteCategorySupplierApi.middleware)
-      .concat(restoreCategorySupplierApi.middleware)
-      .concat(filterByNameCategorySupplierApi.middleware)
-      .concat(filterByCompanyNameCategorySupplierApi.middleware)
-    });
-
+      .concat(authApi.middleware) 
+      .concat(rolesApi.middleware), 
+});
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppDispatch: () => AppDispatch = useDispatch;
