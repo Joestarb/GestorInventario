@@ -18,7 +18,7 @@ export interface ButtonProps extends ChildrenProps {
 export interface InputProps {
   label: string;
   type: string;
-  value: string;
+  value: any;
   placeholder: string;
   name: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;

@@ -1,82 +1,115 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useTheme from '../../hooks/useTheme';
 import { IoFilter } from 'react-icons/io5';
 import WhiteCard from '../../components/WhiteCard';
-import DynamicTable from '../../components/DynamicTable';
 import Button from '../../components/Button';
-import { Link } from 'react-router-dom';
+import { useGetSuppliersQuery } from "../../features/suppliers/getSuppliersApi.ts";
+import { useDeleteSupplierMutation } from "../../features/suppliers/deleteSupplierApi";  // Importa el hook
+import Swal from 'sweetalert2';
+import GetSuppliers from './suppliersComponents/GetSuppliers.tsx';
 
 const Suppliers: React.FC = () => {
-  const { isDarkMode } = useTheme();
+    const { isDarkMode } = useTheme();
 
-  const fakeSuppliers = [
-    { name: 'Acme Corp', product: 'Industrial Tools', contact: '123-456-7890', email: 'contact@acmecorp.com' },
-    { name: 'Tech Solutions', product: 'Software Development', contact: '098-765-4321', email: 'info@techsolutions.com' },
-    { name: 'Fresh Produce Ltd.', product: 'Organic Vegetables', contact: '555-666-7777', email: 'sales@freshproduce.com' },
-    { name: 'Green Energy Co.', product: 'Solar Panels', contact: '321-654-9870', email: 'support@greenenergy.com' },
-    { name: 'AutoParts Inc.', product: 'Car Parts', contact: '444-555-6666', email: 'contact@autoparts.com' },
-    { name: 'Elite Gadgets', product: 'Consumer Electronics', contact: '777-888-9999', email: 'sales@elitegadgets.com' },
-    { name: 'Creative Designs', product: 'Graphic Design Services', contact: '555-123-4567', email: 'info@creativedesigns.com' }
-  ];
+    const { data: supplierData, isLoading, error } = useGetSuppliersQuery();
+    const [suppliers, setSuppliers] = useState<typeof supplierData | null>(null);
 
-  const headers: any = ['Supplier Name', 'Product', 'Contact Number', 'Email', 'Actions'];
+    const [deleteSupplier, { isLoading: isDeleting, isSuccess, }] = useDeleteSupplierMutation();  // Usa el hook
 
-  const renderRow = (supplier: any) => (
-    <tr className='border-b' key={supplier.name}>
-      <td className={`px-6 py-4 font-medium ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>{supplier.name}</td>
-      <td className={`px-6 py-4 font-medium ${isDarkMode ? 'text-gray-100text-white' : 'text-gray-800'}`}>{supplier.product}</td>
-      <td className={`px-6 py-4 font-medium ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>{supplier.contact}</td>
-      <td className={`px-6 py-4 ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}>{supplier.email}</td>
-      <td className="px-2 py-2 text-center">
-        <div className="flex gap-2 justify-center">
-          <Link to={`/suppliers/details/${supplier.name}`}>
-            <button
-              className={`bg-transparent text-xs border border-gray-200 font-bold uppercase p-2 rounded hover:bg-green-500 hover:text-white transition-colors  ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}
-              type="button"
-            >
-              Details
-            </button>
-          </Link>
-          <button
-            className={`bg-transparent text-xs border border-gray-200 font-bold uppercase p-2 rounded hover:bg-blue-500 hover:text-white transition-colors  ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}
-            type="button">
-            Edit
-          </button>
-          <button
-            className={`bg-transparent text-xs border border-gray-200 font-bold uppercase p-2 rounded hover:bg-red-500 hover:text-white transition-colors ${isDarkMode ? 'text-gray-100' : 'text-gray-800'}`}
-            type="button">
-            Delete
-          </button>
-        </div>
-      </td>
-    </tr>
-  );
+    const [supplierIdToDelete, setSupplierIdToDelete] = useState<number | null>(null); // Estado para el ID del proveedor
 
-  return (
-    <WhiteCard
-      title="Suppliers"
-      isDarkMode={isDarkMode}
-      headerActions={
-        <div className="flex gap-2">
-          <Button className="text-xs sm:text-sm">Add Supplier</Button>
-          <button className={`flex items-center space-x-2 bg-transparent text-xs sm:text-sm border border-gray-200 font-bold p-2 rounded ${isDarkMode ? 'text-white' : 'text-black'}`} type="button">
-            <IoFilter className='mr-1' />
-            Filters
-          </button>
-          <button className={`bg-transparent text-xs sm:text-sm border border-gray-200 font-bold p-2 rounded ${isDarkMode ? 'text-white' : 'text-black'}`} type="button">Download all</button>
-        </div>
-      }
-    >
-      <div className="overflow-x-auto">
-        <DynamicTable
-          data={fakeSuppliers}
-          headers={headers}
-          renderRow={renderRow}
-          className="text-sm border text-left"
-        />
-      </div>
-    </WhiteCard>
-  );
+    useEffect(() => {
+        if (supplierData) {
+            setSuppliers(supplierData);
+        }
+    }, [supplierData]);
+
+    // Actualiza el estado después de una eliminación exitosa
+    useEffect(() => {
+        if (isSuccess && supplierIdToDelete !== null) {
+            setSuppliers((prev) => prev?.filter((supplier) => supplier.id_supplier !== supplierIdToDelete));
+            setSupplierIdToDelete(null); // Limpia el ID después de la eliminación
+            Swal.fire({
+                icon: 'success',
+                title: 'Proveedor eliminado',
+                text: 'El proveedor se ha eliminado con éxito.',
+                confirmButtonText: 'Aceptar',
+                customClass: {
+                    popup: isDarkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-800',  // Cambiar fondo y texto según el modo
+                    confirmButton: isDarkMode ? 'bg-blue-500 text-white' : 'bg-blue-700 text-white',
+                }
+            });
+        }
+    }, [isSuccess, supplierIdToDelete, isDarkMode]);
+
+    // Renderizar mientras los datos están cargando
+    if (isLoading) return <p>Cargando suppliers...</p>;
+
+    // Renderizar en caso de error
+    if (error) {
+        const errorMessage = 'status' in error ? error.status : 'Error desconocido';
+        return <p>Error al cargar los suppliers: {errorMessage}</p>;
+    }
+
+    const handleDelete = (id: number) => {
+        Swal.fire({
+            title: '¿Estás seguro?',
+            text: '¡Esta acción no se puede deshacer!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, eliminar',
+            cancelButtonText: 'Cancelar',
+            customClass: {
+                popup: isDarkMode ? 'bg-gray-800 text-gray-100' : 'bg-white text-gray-800',  // Cambiar fondo y texto según el modo
+                confirmButton: isDarkMode ? 'bg-red-500 text-white' : 'bg-red-700 text-white',
+                cancelButton: isDarkMode ? 'bg-gray-700 text-white' : 'bg-gray-300 text-black',
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                setSupplierIdToDelete(id);
+                deleteSupplier(id);
+            }
+        });
+    };
+
+    const headers = ['Supplier Name', 'Category', 'Contact Number', 'Email', 'Suggested Price', 'Actions'];
+
+
+
+    return (
+        <WhiteCard
+            title="Suppliers"
+            isDarkMode={isDarkMode}
+            headerActions={
+                <div className="flex gap-2">
+                    <Button className="text-xs sm:text-sm">Add Supplier</Button>
+                    <button
+                        className={`flex items-center space-x-2 bg-transparent text-xs sm:text-sm border border-gray-200 font-bold p-2 rounded ${isDarkMode ? 'text-white' : 'text-black'}`}
+                        type="button"
+                    >
+                        <IoFilter className='mr-1' />
+                        Filters
+                    </button>
+                    <button
+                        className={`bg-transparent text-xs sm:text-sm border border-gray-200 font-bold p-2 rounded ${isDarkMode ? 'text-white' : 'text-black'}`}
+                        type="button"
+                    >
+                        Download all
+                    </button>
+                </div>
+            }
+        >
+            <div className="overflow-x-auto">
+                <GetSuppliers
+                    isDarkMode={isDarkMode}
+                    isDeleting={isDeleting}
+                    handleDelete={handleDelete}
+                    suppliers={suppliers}
+                    headers={headers}
+                />
+            </div>
+        </WhiteCard>
+    );
 };
 
 export default Suppliers;

@@ -4,7 +4,7 @@ import Sidebar from './layout/Sidebar';
 import Dashboard from './pages/dashboard/Dashboard';
 import Inventory from './pages/inventory/Inventory';
 import ProductDetail from './pages/inventory/ProductDetail';
-import Details from './pages/suppliers/Details';
+import Details from './pages/suppliers/suppliersComponents/Details.tsx';
 import Login from './pages/login/Login';
 import ManageStore from './pages/manageStore/ManageStore';
 import Orders from './pages/orders/Orders';

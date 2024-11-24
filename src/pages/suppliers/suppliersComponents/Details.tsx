@@ -1,6 +1,6 @@
 import React from "react";
-import WhiteCard from '../../components/WhiteCard';
-import useTheme from '../../hooks/useTheme';
+import WhiteCard from '../../../components/WhiteCard.tsx';
+import useTheme from '../../../hooks/useTheme.ts';
 
 const Details: React.FC = () => {
     const { isDarkMode } = useTheme();
