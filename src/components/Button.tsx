@@ -17,9 +17,9 @@ const Button: React.FC<ButtonProps> = ({
             type={type}
             onClick={onClick}
             disabled={disabled}
-            className={`px-4 py-2 rounded-md font-semibold transition-colors 
+            className={`px-4 py-1 rounded-md font-semibold transition-colors text-base
                   ${disabled ? 'bg-gray-400 cursor-not-allowed' : ' '} ${className}
-                  ${isDarkMode ? ' bg-[#130159] hover:bg-[#30216b]  ' : 'bg-blue-500 text-white hover:bg-blue-700'}
+                  ${isDarkMode ? ' bg-blue-700 hover:bg-[#4a88e6]  ' : 'bg-blue-500 text-white hover:bg-blue-700'}
                   ${buttonClassname}
                   `}
         >

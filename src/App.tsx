@@ -14,6 +14,7 @@ import Suppliers from './pages/suppliers/Suppliers';
 import Landing from './pages/landing/Landing';
 import Category from './pages/category/Category';
 import CategoryDetails from './pages/category/categoryComponents/CategoryDetails';
+import Errors from './pages/errors/Errors';
 
 const Layout: React.FC = () => {
   return (
@@ -31,7 +32,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<Landing/>}/>
-
+        <Route path="*" element={<Errors />} />
         <Route element={<Layout />}>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/inventory" element={<Inventory />} />
