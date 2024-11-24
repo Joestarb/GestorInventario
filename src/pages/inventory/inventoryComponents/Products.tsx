@@ -7,47 +7,46 @@ import Modal from '../../../components/Modal';
 import Input from '../../../components/Input';
 import { Link } from 'react-router-dom';
 import { useGetInventoriesQuery } from "../../../features/inventories/getInventoriesApi.ts";
-import {InventoryProduct} from "../../../models/dtos/inventories/inventories.ts";
+import { InventoryProduct } from "../../../models/dtos/inventories/inventories.ts";
+import SkeletonLoader from "../../../components/SkeletonLoader.tsx";
+import useLanguage from "../../../hooks/useLanguage.ts";
+import { useCreateInventoryProductMutation } from "../../../features/inventories/postInventoriesApi.ts";
+import { PostProduct } from "../../../models/dtos/inventories/inventories.ts"; // Importar la interfaz adecuada
+
 const Products: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState('');
-
+    const { translate } = useLanguage();
     const { data: inventories = [], isLoading, error } = useGetInventoriesQuery();
-
-    const headers: (keyof InventoryProduct)[] = [
-        'id_inventory_product',
-        'name_product',
-        'stock_product',
-        'price_product',
-        'name_category_product',
-        'name_state',
-        'name_movement_type',
-        'name_supplier',
-        'name_department',
-        'name_module',
-        'name_company',
-        'date_insert',
-        'date_update',
-        'date_delete',
-        'date_restore',
+    const headers: { key: keyof InventoryProduct; label: string }[] = [
+        { key: 'id_inventory_product', label: 'ID' },
+        { key: 'name_product', label: translate('nameProduct') },
+        { key: 'stock_product', label: 'Stock' },
+        { key: 'price_product', label: translate('price') },
+        { key: 'name_category_product', label: translate('category') },
+        { key: 'name_movement_type', label: translate('movementType') },
+        { key: 'name_supplier', label: translate('supliers') },
+        { key: 'name_department', label: translate('department') },
     ];
 
-    // Renderizar acciones para cada fila
     const renderRowActions = () => (
-        <Link to={'/products'}>
-            <button className="text-blue-500 hover:text-blue-700 font-semibold text-sm">Action</button>
-        </Link>
+        <>
+            <Link to={'/products'}>
+                <Button className="text-blue-500 hover:text-blue-700 font-semibold text-sm">{translate('viewDetail')}</Button>
+            </Link>
+            <Button className="text-blue-500 hover:text-blue-700 font-semibold text-sm">{translate('edit')}</Button>
+        </>
     );
 
     const inputFields = [
-        { label: 'Product Name', placeholder: 'name', name: 'productName' },
-        { label: 'Product Id', placeholder: 'Id', name: 'productId' },
-        { label: 'Category', placeholder: 'name', name: 'category' },
-        { label: 'Buying', placeholder: 'name', name: 'buying' },
-        { label: 'Quantity', placeholder: 'name', name: 'quantity' },
-        { label: 'Unit', placeholder: 'name', name: 'unit' },
-        { label: 'Expire Date', placeholder: 'name', name: 'expireDate' },
-        { label: 'Threshold Value', placeholder: 'name', name: 'thresholdValue' },
+        { label: 'Product Name', placeholder: 'name', name: 'name_product' },
+        { label: 'Stock', placeholder: 'Stock', name: 'stock_product' },
+        { label: 'Price', placeholder: 'Price', name: 'price_product' },
+        { label: 'Category', placeholder: 'Category ID', name: 'id_category_product_Id' },
+        { label: 'Movement Type', placeholder: 'Movement Type ID', name: 'id_movement_type_Id' },
+        { label: 'Supplier', placeholder: 'Supplier ID', name: 'id_supplier_Id' },
+        { label: 'Department', placeholder: 'Department ID', name: 'id_department_Id' },
+        { label: 'Company', placeholder: 'Company ID', name: 'id_company_Id' },
     ];
 
     const options = [
@@ -56,8 +55,36 @@ const Products: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
         { value: 'option3', label: 'Opción 3' },
     ];
 
-    const voidFunc = () => {
-        return 0;
+    const [formData, setFormData] = useState<PostProduct>({
+        name_product: '',
+        stock_product: 0,
+        price_product: 0,
+        id_category_product_Id: 0,
+        id_state_Id: 0,
+        id_movement_type_Id: 0,
+        id_supplier_Id: 0,
+        id_department_Id: 0,
+        id_module_Id: 1,
+        id_company_Id: 1,
+    });
+
+    const [createInventoryProduct, { isSuccess, isError, error: mutationError }] = useCreateInventoryProductMutation();
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            await createInventoryProduct(formData).unwrap();
+        } catch (error) {
+            console.error("Error al crear el producto:", error);
+        }
     };
 
     return (
@@ -77,34 +104,55 @@ const Products: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
                                 onChange={setSelectedValue}
                                 placeholder="Filters"
                             />
-                            <Button onClick={voidFunc}>
+                            <Button onClick={() => { }}>
                                 <p>Download All</p>
                             </Button>
                         </div>
 
+                        {/* Modal para agregar un nuevo producto */}
                         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="New Product">
-                            <div>
-                                {inputFields.map((field) => (
-                                    <Input
-                                        key={field.name}
-                                        label={field.label}
-                                        type="text"
-                                        value=""
-                                        placeholder={field.placeholder}
-                                        name={field.name}
-                                        className="grid grid-cols-2 p-2"
-                                    />
-                                ))}
-                            </div>
+                            <form onSubmit={handleSubmit}>
+                                <div>
+                                    {inputFields.map((field) => (
+                                        <Input
+                                            key={field.name}
+                                            label={field.label}
+                                            type="text"
+                                            value={formData[field.name as keyof PostProduct]}
+                                            placeholder={field.placeholder}
+                                            name={field.name}
+                                            onChange={handleChange}
+                                            className="grid grid-cols-2 p-2"
+                                        />
+                                    ))}
+                                </div>
+                                <button type="submit" className="btn-submit" disabled={isSuccess || isError}>
+                                    {isSuccess ? "Producto Creado" : "Crear Producto"}
+                                </button>
+                                {isError && <p className="text-red-500">Error: {mutationError.message}</p>}
+                            </form>
                         </Modal>
 
                         <div className="overflow-auto">
                             {isLoading ? (
-                                <p>Loading...</p>
+                                <SkeletonLoader />
                             ) : error ? (
                                 <p className="text-red-500">Error fetching inventories</p>
                             ) : (
-                                <DynamicTable data={inventories} headers={headers} renderActions={renderRowActions} />
+                                <DynamicTable
+                                    data={inventories}
+                                    headers={headers.map((header) => header.label)}
+                                    renderRow={(row) =>
+                                        <tr key={row.id_inventory_product}>
+                                            {headers.map(({ key }) => (
+                                                <td key={key} className="px-4 py-2">
+                                                    {row[key]}
+                                                </td>
+                                            ))}
+                                            <td>{renderRowActions()}</td>
+                                        </tr>
+                                    }
+                                />
                             )}
                         </div>
                     </>

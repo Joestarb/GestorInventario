@@ -76,3 +76,8 @@ export interface SelectProps  {
   label?: string;
   placeholder?: string;
 };
+
+export interface SkeletonLoaderProps {
+  rows?: number;
+  columns?: number;
+}

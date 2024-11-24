@@ -16,7 +16,22 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         logout: "Cerrar Sesión",
         setting: "Configuración",
         searchPlaceholder: "Buscar producto, proveedor, orden",
-        changeMode: "Cambiar Modo"
+        changeMode: "Cambiar Modo",
+        nameProduct: "Nombre del Producto",
+        price: 'Precio',
+        category: 'Categoría',
+        state: 'Estado',
+        movementType: 'Tipo de Movimiento',
+        department: 'Departamento',
+        module: 'Módulo',
+        company: 'Compañía',
+        creationDate: 'Fecha de Creación',
+        lastUpdate: 'Última Actualización',
+        deletionDate: 'Fecha de Eliminación',
+        restorationDate: 'Fecha de Restauración',
+        viewDetails: 'Ver Detalles',
+        edit: 'Editar',
+
 
     },
     en: {
@@ -35,6 +50,22 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         logout: "Logout",
         changeMode: "Change Mode",
         setting: "Settings",
-         searchPlaceholder: "Search product, supplier, order"
+         searchPlaceholder: "Search product, supplier, order",
+        nameProduct: "Name of Product",
+        price: 'Price',
+        category: 'Category',
+        state: 'State',
+        movementType: 'Movement Type',
+        department: 'Department',
+        module: 'Module',
+        company: 'Company',
+        creationDate: 'Creation Date',
+        lastUpdate: 'Last Update',
+        deletionDate: 'Deletion Date',
+        restorationDate: 'Restoration Date',
+        viewDetails: 'View details',
+        edit: 'edit',
+
+
     },
 };

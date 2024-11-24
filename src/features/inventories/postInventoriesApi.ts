@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "../../utils/baseUrl";
-import { InventoryProduct } from "../../models/dtos/inventories/inventories";
+import { PostProduct } from "../../models/dtos/inventories/inventories";
 
 export const createInventoryApi = createApi({
     reducerPath: "createInventoryProduct",
     baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}` }),
     endpoints: (builder) => ({
-        createInventoryProduct: builder.mutation<void, Omit<InventoryProduct, 'id_inventory_product' | 'date_insert' | 'date_update' | 'date_delete' | 'date_restore'>>({
+        createInventoryProduct: builder.mutation<void, PostProduct>({
             query: (newProduct) => ({
                 url: `/Inventories/createInventoryProduct`,
                 method: "POST",
