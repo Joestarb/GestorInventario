@@ -8,7 +8,7 @@ export const updateCategoryPurchaseOrderApi = createApi({
   endpoints: (builder) => ({
     updateCategoryPurchaseOrder: builder.mutation<void, { id: number; data: Partial<CategoryPurchaseOrder> }>({
       query: ({ id, data }) => ({
-        url: `/categoriesPurchaseOrders/updateCategoryPurchaseOrder/${id}`,
+        url: `/CategoriesPurchaseOrders/updateCategoryPurchaseOrder/${id}`,
         method: "PUT",
         body: data,
       }),

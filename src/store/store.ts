@@ -47,6 +47,7 @@ export const store = configureStore({
     [companiesSlice.reducerPath]: companiesSlice.reducer,
 
     // Agregar reducers de las nuevas APIs
+    //Categoria Productos
     [getCategoriesProductsApi.reducerPath]: getCategoriesProductsApi.reducer,
     [createCategoryProductApi.reducerPath]: createCategoryProductApi.reducer,
     [updateCategoryProductApi.reducerPath]: updateCategoryProductApi.reducer,
@@ -55,6 +56,7 @@ export const store = configureStore({
     [filterByNameCategoryProductApi.reducerPath]: filterByNameCategoryProductApi.reducer,
     [filterByCompanyNameCategoryProductApi.reducerPath]: filterByCompanyNameCategoryProductApi.reducer,
 
+    //Categoria Ordenes
     [getCategoriesPurchaseOrdersApi.reducerPath]: getCategoriesPurchaseOrdersApi.reducer,
     [createCategoryPurchaseOrderApi.reducerPath]: createCategoryPurchaseOrderApi.reducer,
     [updateCategoryPurchaseOrderApi.reducerPath]: updateCategoryPurchaseOrderApi.reducer,
@@ -63,6 +65,7 @@ export const store = configureStore({
     [filterByNameCategoryPurchaseOrderApi.reducerPath]: filterByNameCategoryPurchaseOrderApi.reducer,
     [filterByCompanyNameCategoryPurchaseOrderApi.reducerPath]: filterByCompanyNameCategoryPurchaseOrderApi.reducer,
 
+    //Categoria Proovedores
     [getCategoriesSuppliersApi.reducerPath]: getCategoriesSuppliersApi.reducer,
     [createSupplierApi.reducerPath]: createSupplierApi.reducer,
     [updateCategorySupplierApi.reducerPath]: updateCategorySupplierApi.reducer,
@@ -73,9 +76,35 @@ export const store = configureStore({
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware()
-      .concat(authApi.middleware) 
-      .concat(rolesApi.middleware), 
+      .concat(authApi.middleware)
+      .concat(rolesApi.middleware)
+      .concat(companiesSlice.middleware)
+      // Middleware de las nuevas APIs
+      .concat(getCategoriesProductsApi.middleware)
+      .concat(createCategoryProductApi.middleware)
+      .concat(updateCategoryProductApi.middleware)
+      .concat(deleteCategoryProductApi.middleware)
+      .concat(restoreCategoryProductApi.middleware)
+      .concat(filterByNameCategoryProductApi.middleware)
+      .concat(filterByCompanyNameCategoryProductApi.middleware)
+
+      .concat(getCategoriesPurchaseOrdersApi.middleware)
+      .concat(createCategoryPurchaseOrderApi.middleware)
+      .concat(updateCategoryPurchaseOrderApi.middleware)
+      .concat(deleteCategoryPurchaseOrderApi.middleware)
+      .concat(restoreCategoryPurchaseOrderApi.middleware)
+      .concat(filterByNameCategoryPurchaseOrderApi.middleware)
+      .concat(filterByCompanyNameCategoryPurchaseOrderApi.middleware)
+
+      .concat(getCategoriesSuppliersApi.middleware)
+      .concat(createSupplierApi.middleware)
+      .concat(updateCategorySupplierApi.middleware)
+      .concat(deleteCategorySupplierApi.middleware)
+      .concat(restoreCategorySupplierApi.middleware)
+      .concat(filterByNameCategorySupplierApi.middleware)
+      .concat(filterByCompanyNameCategorySupplierApi.middleware),
 });
+
 export type AppDispatch = typeof store.dispatch;
 export type RootState = ReturnType<typeof store.getState>;
 export const useAppDispatch: () => AppDispatch = useDispatch;
