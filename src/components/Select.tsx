@@ -9,9 +9,9 @@ const Select: React.FC<SelectProps> = ({ options, value, onChange, label, placeh
             <select
                 value={value}
                 onChange={(e) => onChange(e.target.value)}
-                className={`${isDarkMode? 'bg-[#130159]':' bg-white border'} w-full p-2  rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-800 focus:border-transparent`}
+                className={`${isDarkMode? 'bg-gray-700 border':' bg-white border'} w-full p-2 shadow-sm focus:border-blue-500 focus:outline-none`}
             >
-                {placeholder && <option value="" disabled>{placeholder}</option>}
+                {placeholder && <option className={`${isDarkMode? 'text-white':' text-black'}`} value="" disabled>{placeholder}</option>}
                 {options.map((option) => (
                     <option key={option.value} value={option.value}>
                         {option.label}

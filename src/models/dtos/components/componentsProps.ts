@@ -55,6 +55,7 @@ export interface ModalProps extends ChildrenProps  {
   isOpen: boolean;
   onClose: () => void;
   title?: string;
+  onSave: () => void;
 };
 
 export interface TableProps<T> {
