@@ -1,9 +1,11 @@
 import React from 'react';
 import { ModalProps } from '../models/dtos/components/componentsProps';
 import useTheme from '../hooks/useTheme';
+import useLanguage from "../hooks/useLanguage.ts";
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, onSave }) => {
   const { isDarkMode } = useTheme();
+  const { translate } = useLanguage(); 
 
   if (isOpen) {
     document.body.style.overflow = 'hidden';
@@ -32,13 +34,13 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, onSave 
             onClick={onSave} 
             className={`${isDarkMode ? '' : 'text-white'} px-4 py-2 bg-blue-500 rounded hover:bg-blue-600 mr-3`}
           >
-            Guardar
+            {translate('save')}
           </button>
           <button
             onClick={onClose}
             className={`${isDarkMode ? '' : 'text-white'} px-4 py-2 bg-red-500 rounded hover:bg-red-600`}
           >
-            Cancelar
+            {translate('cancel')}
           </button>
         </div>
       </div>
@@ -46,5 +48,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, onSave 
   );
 };
 
-export default Modal;
-
+export default Modal;
