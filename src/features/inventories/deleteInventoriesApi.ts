@@ -7,7 +7,7 @@ export const deleteInventoryApi = createApi({
     endpoints: (builder) => ({
         deleteInventoryProduct: builder.mutation<void, number>({
             query: (id) => ({
-                url: `/api/Inventories/deleteInventoryProduct/${id}`,
+                url: `/Inventories/deleteInventoryProduct/${id}`,
                 method: "DELETE",
             }),
         }),

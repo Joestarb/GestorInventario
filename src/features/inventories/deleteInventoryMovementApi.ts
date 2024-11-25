@@ -12,7 +12,7 @@ export const deleteInventoryMovementApi = createApi({
     endpoints: (builder) => ({
         deleteInventoryMovement: builder.mutation<DeleteInventoryMovementResponse, number>({
             query: (id) => ({
-                url: `/api/InventoriesMovements/deleteInventoryMovement/${id}`,
+                url: `/InventoriesMovements/deleteInventoryMovement/${id}`,
                 method: "DELETE",
             }),
         }),

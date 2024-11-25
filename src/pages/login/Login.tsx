@@ -1,13 +1,7 @@
 import React from 'react'
 import LoginForm from './loginComponents/LoginForm';
 import BgLogin from '../../assets/edificio.jpg';
-import { useGetRolesQuery } from '../../features/roles/rolesApi';
-import { useEffect, useState } from 'react';
 const Login: React.FC = () => {
-z
-  
-  console.log(roles)
- 
   return (
     <div className="flex justify-center items-center h-screen"
       style={{

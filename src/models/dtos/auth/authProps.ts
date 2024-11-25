@@ -16,3 +16,18 @@ export interface RegisterPayload {
 export interface RegisterResponse {
     message: string;
 }
+
+
+export interface LoginPayload {
+    mail_user: string;
+    password_user: string;
+}
+
+export interface LoginResponse {
+    token: {
+        id_user: number;
+        name_user: string;
+        mail_user: string;
+        role: string;
+    };
+};

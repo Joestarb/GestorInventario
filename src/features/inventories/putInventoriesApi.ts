@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { baseUrl } from "../../utils/baseUrl";
-import { InventoryProduct } from "../../models/dtos/inventories/inventories";
+import {PostProduct, InventoryProduct} from "../../models/dtos/inventories/inventories";
 
 export const updateInventoryApi = createApi({
     reducerPath: "updateInventoryProduct",
     baseQuery: fetchBaseQuery({ baseUrl: `${baseUrl}` }),
     endpoints: (builder) => ({
-        updateInventoryProduct: builder.mutation<void, { id: number; data: Partial<InventoryProduct> }>({
+        updateInventoryProduct: builder.mutation<InventoryProduct, { id: number; data: PostProduct }>({
             query: ({ id, data }) => ({
                 url: `/Inventories/updateInventoryProduct/${id}`,
                 method: "PUT",

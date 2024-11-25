@@ -9,6 +9,7 @@ export const getInventoryMovementsApi = createApi({
     endpoints: (builder) => ({
         getInventoryMovements: builder.query<InventoryMovement[], void>({
             query: () => `/InventoriesMovements/getInventoryMovements`,
+
         }),
     }),
 });
