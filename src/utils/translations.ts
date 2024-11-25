@@ -1,5 +1,3 @@
-import Category from "../pages/category/Category";
-
 // utils/translations.ts
 export const translations: Record<'es' | 'en', Record<string, string>> = {
     es: {
@@ -33,8 +31,8 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         restorationDate: 'Fecha de Restauración',
         viewDetails: 'Ver Detalles',
         edit: 'Editar',
-
-
+        loginSuccess:'Inicio de session Exitoso',
+        details: 'Detalles'
     },
     en: {
         welcome: 'Welcome to',
@@ -67,7 +65,8 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         restorationDate: 'Restoration Date',
         viewDetails: 'View details',
         edit: 'edit',
-
+        loginSuccess:'Login success',
+        details: 'details'
 
     },
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import DynamicTable from '../../../components/DynamicTable';
 import WhiteCard from '../../../components/WhiteCard';
 import Button from '../../../components/Button';
@@ -30,20 +30,28 @@ const Products: React.FC<ProductsProps> = ({
                                                setSelectedValue,
                                                setEditMode
                                            }) => {    const { translate } = useLanguage();
+    const [showDetails, setShowDetails] = useState<boolean>(false);
 
     const renderRowActions = (row: InventoryProduct) => (
         <div className="flex gap-2">
+                <Button
+                    onClick={() => handleEdit(row)}
+                    className=" hover:bg-blue-700 font-semibold text-sm"
+                >
+                    {translate('edit')}
+                </Button>
+                <Button
+                    onClick={() => handleDelete(row.id_inventory_product)}
+                    className="bg-red-500 hover:bg-red-700 font-semibold text-sm"
+                >
+                    {translate('delete')}
+                </Button>
+
             <Button
-                onClick={() => handleEdit(row)}
-                className="text-blue-500 hover:text-blue-700 font-semibold text-sm"
+                onClick={() => (console.log(hola))}
+                className=" bg-amber-500 hover:bg-amber-800 font-semibold text-sm"
             >
-                {translate('edit')}
-            </Button>
-            <Button
-                onClick={() => handleDelete(row.id_inventory_product)}
-                className="text-red-500 hover:text-red-700 font-semibold text-sm"
-            >
-                {translate('delete')}
+                {translate('details')}
             </Button>
         </div>
     );
