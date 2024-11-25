@@ -1,40 +1,41 @@
-import React from 'react'
+import React from 'react';
 import DynamicTable from '../../../components/DynamicTable';
 import WhiteCard from '../../../components/WhiteCard';
 import { Link } from 'react-router-dom';
+import useLanguage from '../../../hooks/useLanguage';
 
 const CategoryList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
-
+    const { translate } = useLanguage();
+    
     const orders = [
-        { name: 'Categoría Proveedores', module: 'Proveedores' },
-        { name: 'Categoría Productos', module: 'Productos' },
-        { name: 'Categoria Ordenes', module: 'Orden' }
+        { name: translate('categorysuppliers'), module: translate('categorysuppliers') },
+        { name: translate('categoryproducts'), module: translate('categorysuppliers') },
+        { name: translate('categoryorders'), module: translate('categorysuppliers') }
     ];
-    const headers = [...(['name', 'module'] as const)];
+    const headers:any = ['name', 'module'] as const;
 
     const renderRowActions = (row: { name: string }) => (
         <Link to={`/category/${encodeURIComponent(row.name)}`}>
             <button className="text-green-500 hover:text-red-400 font-semibold text-sm">
-                Ver registro
+                {translate('viewrecord')}
             </button>
         </Link>
     );
 
-    return(
-        <>
-            <WhiteCard
-                title='Category'
-                isDarkMode={isDarkMode}
-                children={
-                    <>
-                        <div className=' overflow-auto'>
-                            <DynamicTable  data={orders} headers={headers} renderActions={(row) => renderRowActions(row)}/>
-                        </div>
-                    </>
-                }
-            />
-        </>
-    )
-}
+    return (
+        <WhiteCard
+            title={translate('category')}
+            isDarkMode={isDarkMode}
+        >
+            <div className="overflow-auto">
+                <DynamicTable
+                    data={orders}
+                    headers={headers}
+                    renderActions={(row) => renderRowActions(row)}
+                />
+            </div>
+        </WhiteCard>
+    );
+};
 
-export default CategoryList
+export default CategoryList;
