@@ -151,7 +151,11 @@
 
 
 // mike
-
+    system: 'Sistemas', 
+    movementsType: 'Tipos de Movimiento',
+    inventoryMovements: 'Movimientos de Inventario',
+    clasificationMovements: 'Clasificación de Movimientos',
+    clasification: 'Clasificación'
 
 
 
@@ -212,7 +216,7 @@
             add: 'Add',
             nameof: 'Name of the',
             save: 'Save',
-            cancel: 'Cancel'
+            cancel: 'Cancel',
                         
 
 
@@ -322,7 +326,11 @@
 
 
 // mike
-
+    system: 'System', 
+    movementsType: 'Movements Type',
+    inventoryMovements: 'Inventory Movements',
+    clasificationMovements: 'Clasification Movements',
+    clasification: 'Clasification'
 
 
 
