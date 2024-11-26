@@ -45,7 +45,7 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         loginSuccess: 'Inicio de Sesión Exitoso',
         access: 'Acceder',
         system: 'Sistema',
-        details: 'Detalles'
+        details: 'Detalles',
 // arbey
 
 
@@ -217,7 +217,13 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
 
 
 // josue
-
+Accountinformation: 'Información de la Cuenta',
+Profiledetails: 'Detalles de perfil',
+Myprofile: 'Mi Perfil',
+PersonalBusiness: 'Información Personal y Empresarial',
+FullName: 'Nombre Completo',
+position: 'Posición',
+UserDataCompany: 'Datos del Usuario en la Empresa'
 
 
 
@@ -306,7 +312,7 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
         cancel: 'Cancel',
         loginSuccess: 'Login Success',
         access: 'Access',
-        system: 'System'
+        system: 'System',
         // arbey
 
 
@@ -478,7 +484,13 @@ export const translations: Record<'es' | 'en', Record<string, string>> = {
 
 
 // josue
-
+Accountinformation: 'Accout Information',
+Profiledetails: 'Profile Details',
+Myprofile: 'My Profile',
+PersonalBusiness: 'Personal and Business Information',
+FullName: 'Full Name',
+position: 'Position',
+UserDataCompany: 'User Data in the Company',
 
 
 
