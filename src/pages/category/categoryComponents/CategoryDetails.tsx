@@ -241,22 +241,27 @@ const CategoryDetail: React.FC = () => {
             ))}
             <td className="px-2 py-2 text-center">
                 <div className="flex gap-2">
-                    <button
-                        className="bg-transparent text-xs border font-bold p-2 rounded hover:bg-blue-500 hover:text-white"
-                        onClick={() => openModal('edit', category)}
-                    >
-                        {translate('edit')}
-                    </button>
-                    <button
-                        className="bg-transparent text-xs border font-bold p-2 rounded hover:bg-red-500 hover:text-white"
-                        onClick={() => handleDelete(category[idField])}
-                    >
-                        {translate('delete')}
-                    </button>
+                    {(decodedCategoryName !== 'Compañía' && decodedCategoryName !== 'Company') && (
+                        <>
+                            <button
+                                className="bg-transparent text-xs border font-bold p-2 rounded hover:bg-blue-500 hover:text-white"
+                                onClick={() => openModal('edit', category)}
+                            >
+                                {translate('edit')}
+                            </button>
+                            <button
+                                className="bg-transparent text-xs border font-bold p-2 rounded hover:bg-red-500 hover:text-white"
+                                onClick={() => handleDelete(category[idField])}
+                            >
+                                {translate('delete')}
+                            </button>
+                        </>
+                    )}
                 </div>
             </td>
         </tr>
     );
+    
 
     return (
         <WhiteCard

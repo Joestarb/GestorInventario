@@ -11,7 +11,7 @@ const isAuthenticated = (): boolean => {
 const PublicRoute: React.FC = () => {
     if (isAuthenticated()) {
         // Si el usuario ya está autenticado, redirige a "/dashboard" u otra ruta protegida
-        return <Navigate to="/dashboard" replace />;
+        return <Navigate to="/inventory" replace />;
     }
 
     return <Outlet />; // Permite el acceso a las rutas públicas si no está autenticado
@@ -26,7 +26,7 @@ const ProtectedRoute: React.FC<{ roleRequired?: 'Administrator' }> = ({ roleRequ
 
     if (roleRequired && !hasAdminRole()) {
         // Si el rol requerido es "Administrator" y el usuario no tiene ese rol, redirige al dashboard
-        return <Navigate to="/dashboard" replace />;
+        return <Navigate to="/inventory" replace />;
     }
 
     return <Outlet />; // Permite el acceso si está autenticado y cumple los requisitos
