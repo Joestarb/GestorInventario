@@ -126,7 +126,7 @@ const Products: React.FC<ProductsProps> = ({
                 isDarkMode={isDarkMode}
                 children={
                     <>
-                        {user.role === 'Administrator' && (
+                        {user.role != 'User' && (
                             <div className="flex w-full justify-end gap-8">
                                 <Button onClick={() => {
                                     setEditMode(false);

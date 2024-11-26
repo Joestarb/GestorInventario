@@ -51,7 +51,8 @@ const Sidebar: React.FC = () => {
 
     const deleteSession = () => {
         localStorage.removeItem('userToken')
-        window.location.reload();
+        window.location.href = '/login'; 
+        console.log('se ha eliminado')
     }
 
     const user = JSON.parse(localStorage.getItem('userToken') || '{}');

@@ -24,6 +24,7 @@ export interface PostProduct extends Omit<InventoryProduct, 'id_inventory_produc
     id_department_Id: number;
     id_module_Id: number;
     id_company_Id: number;
+    id_user_Id: number;
 }
 
 export interface InventoryMovement {
