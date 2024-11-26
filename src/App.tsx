@@ -18,13 +18,13 @@ import Errors from './pages/errors/Errors';
 import { PublicRoute, ProtectedRoute } from './Routes/ProtectedRoute';
 
 const Layout: React.FC = () => {
-    return (
-        <>
-            <div>
-                <Sidebar />
-            </div>
-        </>
-    );
+      return (
+            <>
+                  <div>
+                        <Sidebar />
+                  </div>
+            </>
+      );
 };
 
 const App: React.FC = () => {

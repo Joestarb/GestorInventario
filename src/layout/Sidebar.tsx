@@ -70,27 +70,36 @@ const Sidebar: React.FC = () => {
                         <nav className="text-sm font-medium text-gray-500 ">
                             <Link to="/dashboard">
                                 <a className={`flex items-center p-3.5 transition cursor-pointer  group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}>
-                                    <IoHomeSharp className='mr-1 w-4 h-4' />
+                                    <IoHomeSharp className='mr-1 w-4 h-4'/>
                                     <span className='font-sans'>{translate('dashboard')}</span>
                                 </a>
                             </Link>
                             <Link to={"/inventory"}>
                                 <a className={`flex items-center p-3.5 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/inventory' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}>
-                                    <MdOutlineInventory className='mr-1 w-4 h-4' />
+                                    <MdOutlineInventory className='mr-1 w-4 h-4'/>
                                     <span className='font-sans'>{translate('inventory')}</span>
+                                </a>
+                            </Link>
+                            <Link to={"/reports"}>
+                                <a className={`flex items-center p-3.5 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/reports' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}
+                                   href="#">
+                                    <BiSolidReport className='mr-1 w-4 h-4'/>
+                                    <span className='font-sans'>{translate('reports')}</span>
                                 </a>
                             </Link>
                             <Link to={"/suppliers"}>
                                 <a className={`flex items-center p-3.5 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/suppliers' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}
+                                  
                                     href="#">
-                                    <PiUserSquareBold className='mr-1 w-4 h-4' />
+                                    <PiUserSquareBold className='mr-1 w-4 h-4'/>
                                     <span className='font-sans'>{translate('supliers')}</span>
                                 </a>
                             </Link>
                             <Link to={"/orders"}>
                                 <a className={`flex items-center p-3.5 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/orders' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}
+                                  
                                     href="#">
-                                    <BsFillBoxSeamFill className='mr-1 w-4 h-4' />
+                                    <BsFillBoxSeamFill className='mr-1 w-4 h-4'/>
                                     <span className='font-sans'>{translate('orders')}</span>
                                 </a>
                             </Link>
@@ -116,15 +125,18 @@ const Sidebar: React.FC = () => {
                             <FaSun className='mr-1 w-4 h-4' />
                             <span className='font-sans'>{translate('changeMode')}</span>
                         </a>
-                        <button
-                            onClick={deleteSession}
-                            className={`flex items-center p-3.5 font-sans w-full transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? 'text-gray-200' : 'text-gray-500'
-                                }`}
-                        >
-                            <MdLogout className="mr-1 w-4 h-4" />
-                            {translate('logout')}
-                        </button>
+                        <Link to={"/setting"}>
+                            <a className={`flex items-center p-3.5 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${location.pathname === '/setting' ? 'bg-blue-600 text-white' : isDarkMode ? ' text-gray-200 hover:bg-gray-700' : 'text-gray-500'}`} href="#">
+                                <IoSettingsSharp className='mr-1 w-4 h-4' />
+                                <span className='font-sans'>{translate('setting')}</span>
+                            </a>
+                        </Link>
+                        <a className={`flex items-center p-3.5 transition cursor-pointer group hover:bg-gray-800 hover:text-gray-200 ${isDarkMode ? ' text-gray-200' : 'text-gray-500'}`}
+                           href="#">
+                            <MdLogout className='mr-1 w-4 h-4'/>
+                            <button onClick={deleteSession} className='font-sans'>{translate('logout')}</button>
 
+                        </a>
                     </div>
                 </nav>
 
