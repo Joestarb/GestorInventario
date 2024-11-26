@@ -28,7 +28,7 @@ const LoginForm: React.FC = () => {
                 title: translate('loginSuccess'), // Mensaje de éxito
                 text: `${translate('welcome')} ${result.token.name_user}`,
                 icon: 'success',
-                confirmButtonText: translate('proceed'),
+                confirmButtonText: translate('access'),
             }).then(() => {
                 // Redirige al usuario al dashboard
                 navigate('/dashboard');

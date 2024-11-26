@@ -82,7 +82,7 @@ const CategoryDetail: React.FC = () => {
         createFunction = createCategoryProduct;
         updateFunction = updateCategoryProduct;
         idField = 'id_category_product';
-    } else if (decodedCategoryName === 'Categoría Proveedores' || decodedCategoryName === 'Category Proveedores ') {
+    } else if (decodedCategoryName === 'Categoría Proveedores' || decodedCategoryName === 'Category Suppliers') {
         categoryDetails = suppliersData;
         headers = ['name_category_supplier', 'name_company'];
         deleteFunction = deleteCategorySupplier;

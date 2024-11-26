@@ -9,13 +9,12 @@ import { GetSuppliersProps, Suppliers,  } from "../../../models/dtos/suppliers/S
 
 const GetSuppliers: React.FC<GetSuppliersProps> = ({ isDarkMode, isDeleting, handleDelete, suppliers }) => {
     const headers: (keyof Suppliers)[] = [
-        "id_supplier",
         "name_supplier",
         "name_category_supplier",
         "phone_supplier",
         "mail_supplier",
-        "suggested_price",
     ];
+    const user = JSON.parse(localStorage.getItem('userToken') || '{}');
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -31,6 +30,7 @@ const GetSuppliers: React.FC<GetSuppliersProps> = ({ isDarkMode, isDeleting, han
             <td className={`px-6 py-4 font-medium ${isDarkMode ? "text-gray-100" : "text-gray-800"}`}>{supplier.phone_supplier}</td>
             <td className={`px-6 py-4 ${isDarkMode ? "text-gray-100" : "text-gray-800"}`}>{supplier.mail_supplier}</td>
             <td className={`px-6 py-4 ${isDarkMode ? "text-gray-100" : "text-gray-800"}`}>{supplier.suggested_price}</td>
+            {user.role === 'Administrator' && (<>
             <td className="px-2 py-2 text-center">
                 <div className="flex gap-2 justify-center">
                     <Link to={`/suppliers/details/${supplier.id_supplier}`}>
@@ -58,6 +58,7 @@ const GetSuppliers: React.FC<GetSuppliersProps> = ({ isDarkMode, isDeleting, han
                     </button>
                 </div>
             </td>
+            </>)}
         </tr>
     );
 
