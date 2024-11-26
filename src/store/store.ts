@@ -27,7 +27,6 @@ import { deleteCategoryProductApi } from "../features/Categories/Product/deleteC
 import { restoreCategoryProductApi } from "../features/Categories/Product/restoreCategoryProduct";
 import { filterByNameCategoryProductApi } from "../features/Categories/Product/filterByName";
 import { filterByCompanyNameCategoryProductApi } from "../features/Categories/Product/filterByCompanyName";
-
 import { getCategoriesPurchaseOrdersApi } from "../features/Categories/PurchaseOrder/getCategoriesPurchaseOrders";
 import { createCategoryPurchaseOrderApi } from "../features/Categories/PurchaseOrder/createCategoryPurchaseOrder";
 import { updateCategoryPurchaseOrderApi } from "../features/Categories/PurchaseOrder/updateCategoryPurchaseOrder";
@@ -35,7 +34,6 @@ import { deleteCategoryPurchaseOrderApi } from "../features/Categories/PurchaseO
 import { restoreCategoryPurchaseOrderApi } from "../features/Categories/PurchaseOrder/restoreCategoryPurchaseOrder";
 import { filterByNameCategoryPurchaseOrderApi } from "../features/Categories/PurchaseOrder/filterByName";
 import { filterByCompanyNameCategoryPurchaseOrderApi } from "../features/Categories/PurchaseOrder/filterByCompanyName";
-
 import { getCategoriesSuppliersApi } from "../features/Categories/Supplier/getCategoriesSuppliers";
 import { createSupplierApi } from "../features/Categories/Supplier/createCategorySupplier";
 import { updateCategorySupplierApi } from "../features/Categories/Supplier/updateCategorySupplier";
@@ -43,6 +41,8 @@ import { deleteCategorySupplierApi } from "../features/Categories/Supplier/delet
 import { restoreCategorySupplierApi } from "../features/Categories/Supplier/restoreCategorySupplier";
 import { filterByNameCategorySupplierApi } from "../features/Categories/Supplier/filterByName";
 import { filterByCompanyNameCategorySupplierApi  } from "../features/Categories/Supplier/filterByCompanyName";
+import { departmentSlice } from "../features/Department/departmentSlice.ts";
+import { stateSlice } from "../features/State/stateSlice.ts";
 
 export const store = configureStore({
   reducer: {
@@ -56,6 +56,8 @@ export const store = configureStore({
     [clasificationMovementSlice.reducerPath]: clasificationMovementSlice.reducer,
     [purchaseOrderSlice.reducerPath]: purchaseOrderSlice.reducer,
     [companiesSlice.reducerPath]: companiesSlice.reducer,
+    [departmentSlice.reducerPath]: departmentSlice.reducer,
+    [stateSlice.reducerPath]: stateSlice.reducer,
 
     // Agregar reducers de las nuevas APIs
     //Categoria Productos
@@ -123,6 +125,9 @@ export const store = configureStore({
       .concat(restoreCategoryPurchaseOrderApi.middleware)
       .concat(filterByNameCategoryPurchaseOrderApi.middleware)
       .concat(filterByCompanyNameCategoryPurchaseOrderApi.middleware)
+      .concat(purchaseOrderSlice.middleware)
+      .concat(departmentSlice.middleware)
+      .concat(stateSlice.middleware)
 
       .concat(getCategoriesSuppliersApi.middleware)
       .concat(createSupplierApi.middleware)

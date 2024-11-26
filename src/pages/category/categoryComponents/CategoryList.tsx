@@ -8,14 +8,14 @@ const CategoryList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     const { translate } = useLanguage();
     
     const orders = [
-        { name: translate('categorysuppliers'), module: translate('categorysuppliers') },
-        { name: translate('categoryproducts'), module: translate('categorysuppliers') },
-        { name: translate('categoryorders'), module: translate('categorysuppliers') },
-        { name: translate('movementsType'), module: translate('inventoryMovements') },
-        { name: translate('company'), module: translate('system') },
-        {name : translate('clasificationMovements'), module: translate('clasification')},
+        { name: translate('categorysuppliers') },
+        { name: translate('categoryproducts') },
+        { name: translate('categoryorders') },
+        { name: translate('movementsType') },
+        { name: translate('company') },
+        {name : translate('clasificationMovements')},
     ];
-    const headers:any = ['name', 'module'] as const;
+    const headers:any = ['name'] as const;
 
     const renderRowActions = (row: { name: string }) => (
         <Link to={`/category/${encodeURIComponent(row.name)}`}>

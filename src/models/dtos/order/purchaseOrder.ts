@@ -1,19 +1,38 @@
 export interface purchaseOrder {
-    Id_purchase_order: number;
-    Name_purchase_order: string;
-    Amount_purchase_order: number;
-    Unit_price_product: number;
-    Total_price_products:number;
-    Name_user: string;
-    Name_category_purchase_order: string;
-    Name_department: string;
-    Name_supplier: string;
-    Name_state: string;
-    Name_movement_type: string;
-    Name_module: string;
-    Name_company: string;
-    Date_insert: string;
-    Date_update: string;
-    Date_delete: string;
-    Date_restore: string;
+    id_purchase_order: number;
+    name_purchase_order: string;
+    amount_purchase_order: number;
+    unit_price_product: number;
+    total_price_products:number;
+    name_user: string;
+    name_category_purchase_order: string;
+    name_department: string;
+    name_supplier: string;
+    name_state: string;
+    name_movement_type: string;
+    name_module: string;
+    name_company: string; 
+    date_insert: string;
+    date_update: string;
+    date_delete: string;
+    date_restore: string;
+    products: {
+        id_inventory_product: number;
+        quantity: number;
+        unit_price: number;
+        name_inventory_product: string;
+    }[];
+}
+
+export interface PostPurchaseOrder {
+    name_purchase_order: string;
+    id_user_Id: number;
+    id_category_purchase_order_Id: number;
+    id_department_Id: number;
+    id_supplier_Id: number;
+    id_state_Id: number;
+    products: {
+        quantity: number;
+        id_inventory_product_Id: number;
+    }[];
 }

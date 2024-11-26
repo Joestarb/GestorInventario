@@ -8,11 +8,29 @@ export const purchaseOrderSlice = createApi({
     endpoints: (builder) => ({
         getPurchaseOrder: builder.query<purchaseOrder[], void>({
             query: () => ({
-                url: "/purchaseOrder/getPurchaseOrders",
+                url: "/PurchaseOrders/getPurchaseOrders",
                 method: "GET",
+            }),
+        }),
+        createPurchaseOrder: builder.mutation<void, Partial<purchaseOrder>>({
+            query: (newPurchaseOrder) => ({
+                url: "/PurchaseOrders/createPurchaseOrder",
+                method: "POST",
+                body: newPurchaseOrder,
+            }),
+        }),
+        updatePurchaseOrder: builder.mutation<void, purchaseOrder>({
+            query: (updatePurchaseOrder) => ({
+                url: `/PurchaseOrders/updatePurchaseOrder/${updatePurchaseOrder.id_purchase_order}`,
+            }),
+        }),
+        deletePurchaseOrder: builder.mutation<void, number>({
+            query: (id) => ({
+                url: `/PurchaseOrders/deletePurchaseOrder/${id}`,
+                method: "DELETE",
             }),
         }),
     }),
 });
 
-export const { useGetPurchaseOrderQuery } = purchaseOrderSlice;
+export const { useGetPurchaseOrderQuery, useCreatePurchaseOrderMutation, useUpdatePurchaseOrderMutation, useDeletePurchaseOrderMutation } = purchaseOrderSlice;

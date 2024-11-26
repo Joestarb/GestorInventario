@@ -155,7 +155,10 @@
     movementsType: 'Tipos de Movimiento',
     inventoryMovements: 'Movimientos de Inventario',
     clasificationMovements: 'Clasificación de Movimientos',
-    clasification: 'Clasificación'
+    clasification: 'Clasificación',
+    nameOrder: 'Nombre de la Orden de compra',
+    amountItems: 'Cantidad de Artículos',
+    totalPrice: 'Precio Total'
 
 
 
@@ -330,7 +333,10 @@
     movementsType: 'Movements Type',
     inventoryMovements: 'Inventory Movements',
     clasificationMovements: 'Clasification Movements',
-    clasification: 'Clasification'
+    clasification: 'Clasification',
+    nameOrder: 'Name Purchase Order',
+    amountItems: 'Amount Items',
+    totalPrice: 'Total Price'
 
 
 
