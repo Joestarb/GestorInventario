@@ -24,6 +24,7 @@ export interface PostProduct extends Omit<InventoryProduct, 'id_inventory_produc
     id_department_Id: number;
     id_module_Id: number;
     id_company_Id: number;
+    id_user_Id: number;
 }
 
 export interface InventoryMovement {
@@ -45,4 +46,9 @@ export interface InventoryMovement {
 export interface InventoryMovementResponse {
     success: boolean;
     message: string;
+}
+
+export interface InventoryPDF{
+    companyName: string; 
+    departmentName: string; 
 }

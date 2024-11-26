@@ -5,6 +5,7 @@ import themeReducer from '../features/theme/themeSlice';
 import languageReducer from '../features/language/languageSlice';
 import { authApi } from "../features/Auth/authApi";
 import { rolesApi } from "../features/roles/rolesApi";
+import { inventoryPDFApi } from "../features/inventories/getInventoryPDFApi.ts";
 import { getInventoriesApi } from "../features/inventories/getInventoriesApi";
 import {deleteInventoryApi} from "../features/inventories/deleteInventoriesApi.ts";
 import {updateInventoryApi} from "../features/inventories/putInventoriesApi.ts";
@@ -58,6 +59,7 @@ export const store = configureStore({
     [companiesSlice.reducerPath]: companiesSlice.reducer,
     [departmentSlice.reducerPath]: departmentSlice.reducer,
     [stateSlice.reducerPath]: stateSlice.reducer,
+    [inventoryPDFApi.reducerPath]: inventoryPDFApi.reducer,
 
     // Agregar reducers de las nuevas APIs
     //Categoria Productos
@@ -107,6 +109,7 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(rolesApi.middleware)
       .concat(companiesSlice.middleware)
+      .concat(inventoryPDFApi.middleware)
       .concat(clasificationMovementSlice.middleware)
       .concat(movementsTypeSlice.middleware)
       // Middleware de las nuevas APIs

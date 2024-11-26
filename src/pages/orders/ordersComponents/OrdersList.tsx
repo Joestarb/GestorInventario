@@ -43,34 +43,47 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
         products: [] as any[],
     });
 
-    const headers = [ 'name_purchase_order', 'name_user', 'name_category_purchase_order', 'name_department', 'name_supplier', 'name_state', 'name_movement_type', 'name_company', 'products' ];
+    const headers = [
+        'name_purchase_order',
+        'name_user',
+        'name_category_purchase_order',
+        'name_department',
+        'name_supplier',
+        'name_state',
+        'name_movement_type',
+        'name_company',
+        'products',
+    ];
 
-    const orders = purchaseOrder?.map((order: any) => ({
-        name_purchase_order: order.name_purchase_order,
-        name_user: order.name_user,
-        name_category_purchase_order: order.name_category_purchase_order,
-        name_department: order.name_department,
-        name_supplier: order.name_supplier,
-        name_state: order.name_state,
-        name_movement_type: order.name_movement_type,
-        name_company: order.name_company,
-        products: order.products
-            .map((product: any) => 
-                `Quantity: ${product.quantity}, Product Name: ${product.name_inventory_product}, Unit Price: ₹${product.unit_price}`)
-            .join(' / '),
-    })) || [];
+    const orders =
+        purchaseOrder?.map((order: any) => ({
+            name_purchase_order: order.name_purchase_order,
+            name_user: order.name_user,
+            name_category_purchase_order: order.name_category_purchase_order,
+            name_department: order.name_department,
+            name_supplier: order.name_supplier,
+            name_state: order.name_state,
+            name_movement_type: order.name_movement_type,
+            name_company: order.name_company,
+            products: order.products
+                .map(
+                    (product: any) =>
+                        `Quantity: ${product.quantity}, Product Name: ${product.name_inventory_product}, Unit Price: ₹${product.unit_price}`
+                )
+                .join(' / '),
+        })) || [];
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        setNewOrder(prevState => ({
+        setNewOrder((prevState) => ({
             ...prevState,
-            [name]: value
+            [name]: value,
         }));
         console.log(`Input changed: ${name} = ${value}`);
     };
 
     const handleSelectChange = (name: string, value: string | number) => {
-        setNewOrder(prevState => ({
+        setNewOrder((prevState) => ({
             ...prevState,
             [name]: typeof value === 'string' ? value : parseInt(value as string),
         }));
@@ -80,9 +93,9 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     const handleAddProduct = () => {
         if (selectedProduct) {
             const updatedProducts = [...newOrder.products, selectedProduct];
-            setNewOrder(prevState => ({
+            setNewOrder((prevState) => ({
                 ...prevState,
-                products: updatedProducts
+                products: updatedProducts,
             }));
             setSelectedProduct(null);
         } else {
@@ -92,14 +105,31 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
 
     const handleSave = async () => {
         console.log('New order before validation:', newOrder);
-        if (!newOrder.name_purchase_order || !newOrder.id_user_Id || !newOrder.id_category_purchase_order_Id || !newOrder.id_department_Id || !newOrder.id_supplier_Id || !newOrder.id_state_Id || !newOrder.id_movement_type_Id || !newOrder.id_company_Id || !newOrder.products || newOrder.products.length === 0) {
+        if (
+            !newOrder.name_purchase_order ||
+            !newOrder.id_user_Id ||
+            !newOrder.id_category_purchase_order_Id ||
+            !newOrder.id_department_Id ||
+            !newOrder.id_supplier_Id ||
+            !newOrder.id_state_Id ||
+            !newOrder.id_movement_type_Id ||
+            !newOrder.id_company_Id ||
+            !newOrder.products ||
+            newOrder.products.length === 0
+        ) {
             Swal.fire('Error', 'Por favor, complete todos los campos.', 'error');
             return;
         }
 
-        const invalidProducts = newOrder.products.filter(product => product.quantity <= 0 || !product.id_inventory_product);
+        const invalidProducts = newOrder.products.filter(
+            (product) => product.quantity <= 0 || !product.id_inventory_product
+        );
         if (invalidProducts.length > 0) {
-            Swal.fire('Error', 'Las cantidades de los productos deben ser mayores a 0 y los productos deben ser válidos.', 'error');
+            Swal.fire(
+                'Error',
+                'Las cantidades de los productos deben ser mayores a 0 y los productos deben ser válidos.',
+                'error'
+            );
             return;
         }
 
@@ -112,10 +142,10 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
             id_state_Id: newOrder.id_state_Id,
             id_movement_type_Id: newOrder.id_movement_type_Id,
             id_company_Id: newOrder.id_company_Id,
-            products: newOrder.products.map(product => ({
+            products: newOrder.products.map((product) => ({
                 quantity: product.quantity,
-                id_inventory_product_Id: product.id_inventory_product
-            }))
+                id_inventory_product_Id: product.id_inventory_product,
+            })),
         };
         console.log('Request payload:', requestPayload);
         try {
@@ -141,15 +171,12 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     return (
         <>
             <WhiteCard
-                title='Orders'
+                title="Orders"
                 isDarkMode={isDarkMode}
                 children={
                     <>
-                        <div className='flex w-full justify-end gap-8'>
-                            <Button
-                                onClick={() => setIsModalOpen(true)}
-                                children={<p>Add Order</p>} 
-                            />
+                        <div className="flex w-full justify-end gap-8">
+                            <Button onClick={() => setIsModalOpen(true)} children={<p>Add Order</p>} />
                         </div>
 
                         <Modal
@@ -165,87 +192,154 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
                                     value={newOrder.name_purchase_order}
                                     onChange={handleInputChange}
                                 />
-                                <div className='grid grid-cols-2'>
+                                <div className="grid grid-cols-2">
                                     <Select
-                                        label='Users'
+                                        label="Users"
                                         name="id_user_Id"
-                                        options={users?.map((user: any) => ({ label: user.name_rol, value:user.id_rol })) || []}
+                                        options={
+                                            users?.map((user: any) => ({
+                                                label: user.name_rol,
+                                                value: user.id_rol,
+                                            })) || []
+                                        }
                                         value={newOrder.id_user_Id}
-                                        onChange={(selectedValue) => handleSelectChange('id_user_Id', selectedValue)} 
+                                        onChange={(selectedValue) =>
+                                            handleSelectChange('id_user_Id', selectedValue)
+                                        }
                                     />
                                     <Select
                                         label="Category"
                                         name="id_category_purchase_order_Id"
-                                        options={categories?.map((category: any) => ({ label: category.name_category_purchase_order, value: category.id_category_purchase_order })) || []}
+                                        options={
+                                            categories?.map((category: any) => ({
+                                                label: category.name_category_purchase_order,
+                                                value: category.id_category_purchase_order,
+                                            })) || []
+                                        }
                                         value={newOrder.id_category_purchase_order_Id}
-                                        onChange={value => handleSelectChange('id_category_purchase_order_Id', value)}
+                                        onChange={(value) =>
+                                            handleSelectChange('id_category_purchase_order_Id', value)
+                                        }
                                     />
                                     <Select
                                         label="Department"
                                         name="id_department_Id"
-                                        options={departments?.map((department: any) => ({ label: department.name_department, value: department.id_department })) || []}
+                                        options={
+                                            departments?.map((department: any) => ({
+                                                label: department.name_department,
+                                                value: department.id_department,
+                                            })) || []
+                                        }
                                         value={newOrder.id_department_Id}
-                                        onChange={value => handleSelectChange('id_department_Id', value)}
+                                        onChange={(value) =>
+                                            handleSelectChange('id_department_Id', value)
+                                        }
                                     />
                                     <Select
                                         label="Supplier"
                                         name="id_supplier_Id"
-                                        options={suppliers?.map((supplier: any) => ({ label: supplier.name_supplier, value: supplier.id_supplier })) || []}
+                                        options={
+                                            suppliers?.map((supplier: any) => ({
+                                                label: supplier.name_supplier,
+                                                value: supplier.id_supplier,
+                                            })) || []
+                                        }
                                         value={newOrder.id_supplier_Id}
-                                        onChange={value => handleSelectChange('id_supplier_Id', value)}
+                                        onChange={(value) =>
+                                            handleSelectChange('id_supplier_Id', value)
+                                        }
                                     />
                                     <Select
                                         label="State"
                                         name="id_state_Id"
-                                        options={states?.map((state: any) => ({ label: state.name_state, value: state.id_state })) || []}
+                                        options={
+                                            states?.map((state: any) => ({
+                                                label: state.name_state,
+                                                value: state.id_state,
+                                            })) || []
+                                        }
                                         value={newOrder.id_state_Id}
-                                        onChange={value => handleSelectChange('id_state_Id', value)}
+                                        onChange={(value) => handleSelectChange('id_state_Id', value)}
                                     />
                                     <Select
-                                        label='Movement Type'
+                                        label="Movement Type"
                                         name="id_movement_type_Id"
-                                        options={movementsType?.map((movementType: any) => ({ label: movementType.name_movement_type, value: movementType.id_movement_type}) || [])}
+                                        options={
+                                            movementsType?.map((movement: any) => ({
+                                                label: movement.name_movement_type,
+                                                value: movement.id_movement_type,
+                                            })) || []
+                                        }
                                         value={newOrder.id_movement_type_Id}
-                                        onChange={value => handleSelectChange('id_movement_type_Id', value)}
+                                        onChange={(value) =>
+                                            handleSelectChange('id_movement_type_Id', value)
+                                        }
                                     />
                                     <Select
-                                        label='Company'
+                                        label="Company"
                                         name="id_company_Id"
-                                        options={companies?.map((company: anny) => ({ label: company.name_company, value: company.id_company}) || [])}
+                                        options={
+                                            companies?.map((company: any) => ({
+                                                label: company.name_company,
+                                                value: company.id_company,
+                                            })) || []
+                                        }
                                         value={newOrder.id_company_Id}
-                                        onChange={value => handleSelectChange('id_company_Id', value)}
+                                        onChange={(value) => handleSelectChange('id_company_Id', value)}
                                     />
                                 </div>
-                                <div className='flex'>
-                                    <Select
-                                        label="Select Product"
-                                        value={selectedProduct ? selectedProduct.id_inventory_product.toString() : ''}
-                                        options={inventories?.map((inventory: InventoryProduct) => ({
-                                            label: `${inventory.name_product} - ₹${inventory.price_product}`,
-                                            value: inventory.id_inventory_product.toString(),
-                                        })) || []}
-                                        onChange={(selectedId: string) => {
-                                            const product = inventories?.find((inventory: InventoryProduct) => inventory.id_inventory_product.toString() === selectedId);
-                                            setSelectedProduct(product || null);
-                                        }}
+                            </div>
+                            <div>
+                                <h3>Add Products</h3>
+                                <Select
+                                    label="Products"
+                                    options={
+                                        inventories?.map((inventory: InventoryProduct) => ({
+                                            label: inventory.name_inventory_product,
+                                            value: inventory.id_inventory_product,
+                                        })) || []
+                                    }
+                                    value={selectedProduct?.id_inventory_product}
+                                    onChange={(value) =>
+                                        setSelectedProduct(
+                                            inventories?.find(
+                                                (product: InventoryProduct) =>
+                                                    product.id_inventory_product === value
+                                            ) || null
+                                        )
+                                    }
+                                />
+                                <Input
+                                    type="number"
+                                    label="Quantity"
+                                    name="quantity"
+                                    value={selectedProduct?.quantity || ''}
+                                    onChange={(e) =>
+                                        setSelectedProduct((prevState) => ({
+                                            ...prevState!,
+                                            quantity: parseInt(e.target.value),
+                                        }))
+                                    }
+                                />
+                                <Button
+                                    onClick={handleAddProduct}
+                                    children={<p>Add Product</p>}
+                                />
+                                {newOrder.products.length > 0 && (
+                                    <DynamicTable
+                                        headers={['Product Name', 'Quantity']}
+                                        rows={newOrder.products.map((product: any) => ({
+                                            name: product.name_inventory_product,
+                                            quantity: product.quantity,
+                                        }))}
                                     />
-                                    <Button onClick={handleAddProduct} children={<p>Add Product</p>} />
-                                </div>
-                                <div>
-                                    <h4>Selected Products:</h4>
-                                    <ul>
-                                        {newOrder.products.map((product, index) => (
-                                            <li key={index}>
-                                                {product.name_product} - ₹{product.price_product}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>    
+                                )}
                             </div>
                         </Modal>
-                        <div className='overflow-auto'>
-                            <DynamicTable data={orders} headers={headers} />
-                        </div>
+                        <DynamicTable
+                            headers={headers}
+                            rows={orders}
+                        />
                     </>
                 }
             />

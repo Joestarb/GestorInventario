@@ -9,7 +9,7 @@ import { useCreateInventoryProductMutation } from "../../features/inventories/po
 import { useUpdateInventoryProductMutation } from "../../features/inventories/putInventoriesApi.ts";
 import { useDeleteInventoryProductMutation } from "../../features/inventories/deleteInventoriesApi.ts";
 import { InventoryProduct } from "../../models/dtos/inventories/inventories.ts";
-
+import Swal from 'sweetalert2';
 const Inventory: React.FC = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState('');
@@ -17,8 +17,8 @@ const Inventory: React.FC = () => {
     const [selectedProduct, setSelectedProduct] = useState<InventoryProduct | null>(null);
 
     const { translate } = useLanguage();
-    const {isDarkMode} = useTheme()
-    const { data: inventories = [], isLoading, error } = useGetInventoriesQuery();
+    const { isDarkMode } = useTheme()
+    const { data: inventories = [], isLoading, error, refetch } = useGetInventoriesQuery();
     const [createInventoryProduct] = useCreateInventoryProductMutation();
     const [updateInventoryProduct] = useUpdateInventoryProductMutation();
     const [deleteInventoryProduct] = useDeleteInventoryProductMutation(); // Hook de eliminación
@@ -59,13 +59,14 @@ const Inventory: React.FC = () => {
         id_department_Id: 0,
         id_module_Id: 1,
         id_company_Id: 1,
+        id_user_Id: 1
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
             ...prevData,
-            [name]: ['id_company_Id', 'id_module_Id', 'id_state_Id'].includes(name)
+            [name]: ['id_company_Id', 'id_module_Id', 'id_state_Id', 'id_user_Id'].includes(name)
                 ? 1 // Mantén estos campos siempre en 1
                 : value,
         }));
@@ -93,11 +94,40 @@ const Inventory: React.FC = () => {
 
     const handleDelete = async (id: number) => {
         try {
-            await deleteInventoryProduct(id).unwrap(); // Llama al endpoint para eliminar
-            console.log(`Producto con ID ${id} eliminado.`);
+            // Confirmación con SweetAlert
+            const result = await Swal.fire({
+                title: '¿Estás seguro?',
+                text: "Esta acción no se puede deshacer",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar',
+            });
+
+            if (result.isConfirmed) {
+                await deleteInventoryProduct(id).unwrap(); // Llama al endpoint para eliminar
+                console.log(`Producto con ID ${id} eliminado.`);
+
+                Swal.fire(
+                    '¡Eliminado!',
+                    'El producto ha sido eliminado.',
+                    'success'
+                );
+            }
         } catch (error) {
             console.error("Error al eliminar el producto:", error);
+
+            Swal.fire(
+                'Error',
+                'No se pudo eliminar el producto.',
+                'error'
+            );
         }
+        refetch();
+
+
     };
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -109,15 +139,38 @@ const Inventory: React.FC = () => {
                     id: selectedProduct.id_inventory_product,
                     data: formData,
                 }).unwrap();
+
+                Swal.fire(
+                    '¡Actualizado!',
+                    'El producto ha sido actualizado correctamente.',
+                    'success'
+                );
             } else {
                 await createInventoryProduct(formData).unwrap();
+
+                Swal.fire(
+                    '¡Creado!',
+                    'El producto ha sido creado exitosamente.',
+                    'success'
+                );
             }
+
             setIsModalOpen(false);
             resetForm();
+
+            // Refresca los datos de inventarios
+            refetch();
         } catch (error) {
             console.error("Error al guardar el producto:", error);
+
+            Swal.fire(
+                'Error',
+                'No se pudo guardar el producto.',
+                'error'
+            );
         }
     };
+
 
     const resetForm = () => {
         setFormData({
@@ -131,40 +184,40 @@ const Inventory: React.FC = () => {
             id_department_Id: 0,
             id_module_Id: 1,
             id_company_Id: 1,
+            id_user_Id: 1,
         });
     };
 
     return (
-    <div className=' py-6 px-4'>
-      <OverhallInventory isDarkMode={isDarkMode} />
-      <br />
-        <Products
-            isDarkMode={isDarkMode}
-            inventories={inventories}
-            isLoading={isLoading}
-            error={error}
-            createInventoryProduct={createInventoryProduct}
-            updateInventoryProduct={updateInventoryProduct}
-            deleteInventoryProduct={deleteInventoryProduct}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            formData={formData}
-            setFormData={setFormData}
-            headers={headers}
-            inputFields={inputFields}
-            editMode={editMode}
-            selectedProduct={selectedProduct}
-            resetForm={resetForm}
-            setIsModalOpen={setIsModalOpen}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            isModalOpen={isModalOpen}
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-            setEditMode={setEditMode}
-        />
-    </div>
-  )
+        <div className=' py-6 h-screen px-4'>
+            <br />
+            <Products
+                isDarkMode={isDarkMode}
+                inventories={inventories}
+                isLoading={isLoading}
+                error={error}
+                createInventoryProduct={createInventoryProduct}
+                updateInventoryProduct={updateInventoryProduct}
+                deleteInventoryProduct={deleteInventoryProduct}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                formData={formData}
+                setFormData={setFormData}
+                headers={headers}
+                inputFields={inputFields}
+                editMode={editMode}
+                selectedProduct={selectedProduct}
+                resetForm={resetForm}
+                setIsModalOpen={setIsModalOpen}
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                isModalOpen={isModalOpen}
+                selectedValue={selectedValue}
+                setSelectedValue={setSelectedValue}
+                setEditMode={setEditMode}
+            />
+        </div>
+    )
 }
 
 export default Inventory

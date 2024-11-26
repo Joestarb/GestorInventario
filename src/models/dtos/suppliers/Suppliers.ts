@@ -13,27 +13,24 @@
         date_restore: string;
 }
 
-  export interface SuppliersPostAndPut  {
-        name_supplier: string;
-        mail_supplier: string;
-        phone_supplier: number;
-        suggested_price: number;
-        id_category_supplier_Id: number;
-        id_module_Id: number;
-        id_company_Id: number;
-    }
+export interface SuppliersPostAndPut {
+    name_supplier: string;
+    mail_supplier: string;
+    phone_supplier: number;
+    id_category_supplier_Id: number;
+    id_company_Id: number;
+    id_module_Id: number;
+    products: {
+      id_inventory_product_Id: number;
+      suggested_price: number;
+    }[];
+  }
+  
 
 
     export interface SuppliersResponse {
         success: boolean;
         message: string;
-        data: {
-            id_supplier: number;
-            name_supplier: string;
-            mail_supplier: string;
-            phone_supplier: number;
-            suggested_price: number;
-        };
     }
 
 

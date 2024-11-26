@@ -8,12 +8,10 @@ const CategoryList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     const { translate } = useLanguage();
     
     const orders = [
-        { name: translate('categorysuppliers') },
-        { name: translate('categoryproducts') },
-        { name: translate('categoryorders') },
-        { name: translate('movementsType') },
-        { name: translate('company') },
-        {name : translate('clasificationMovements')},
+        { name: translate('categorysuppliers'), module: translate('categorysuppliers') },
+        { name: translate('categoryproducts'), module: translate('categorysuppliers') },
+        { name: translate('categoryorders'), module: translate('categorysuppliers') },
+        { name: translate('company'), module: translate('system') }
     ];
     const headers:any = ['name'] as const;
 

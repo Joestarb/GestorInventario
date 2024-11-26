@@ -7,13 +7,17 @@ const isAuthenticated = (): boolean => {
     return !!token; // Devuelve true si hay un token, de lo contrario, false
 };
 
-// Función para verificar si el usuario tiene el rol de Administrador
-const hasAdminRole = (): boolean => {
-    const user = JSON.parse(localStorage.getItem('userToken') || '{}');
-    return user?.role === 'Administrator'; // Verifica si el rol es "Administrator"
+// Componente para proteger rutas públicas
+const PublicRoute: React.FC = () => {
+    if (isAuthenticated()) {
+        // Si el usuario ya está autenticado, redirige a "/dashboard" u otra ruta protegida
+        return <Navigate to="/inventory" replace />;
+    }
+
+    return <Outlet />; // Permite el acceso a las rutas públicas si no está autenticado
 };
 
-// Componente de ruta protegida
+// Componente de ruta protegida existente
 const ProtectedRoute: React.FC<{ roleRequired?: 'Administrator' }> = ({ roleRequired }) => {
     if (!isAuthenticated()) {
         // Si el usuario no está autenticado, lo redirige al login
@@ -21,11 +25,27 @@ const ProtectedRoute: React.FC<{ roleRequired?: 'Administrator' }> = ({ roleRequ
     }
 
     if (roleRequired && !hasAdminRole()) {
-        // Si el rol requerido es "Administrator" y el usuario no tiene ese rol, redirige a otra página (por ejemplo, Dashboard)
-        return <Navigate to="/dashboard" replace />;
+        // Si el rol requerido es "Administrator" y el usuario no tiene ese rol, redirige al dashboard
+        return <Navigate to="/inventory" replace />;
     }
 
-    return <Outlet />; // Si está autenticado y tiene el rol adecuado, permite el acceso a las rutas
+    return <Outlet />; // Permite el acceso si está autenticado y cumple los requisitos
 };
 
-export default ProtectedRoute;
+// Función para verificar si el usuario tiene el rol de Administrador
+const hasAdminRole = (): boolean => {
+    const userToken = localStorage.getItem('userToken');
+    if (!userToken) {
+        return false; // Si no hay token, no tiene acceso
+    }
+
+    try {
+        const user = JSON.parse(userToken); // Parseamos el token
+        return user?.role === 'Administrator';
+    } catch (error) {
+        return false; 
+    }
+};
+
+export { isAuthenticated, hasAdminRole }; 
+export { PublicRoute, ProtectedRoute };
