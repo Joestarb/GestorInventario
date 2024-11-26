@@ -105,6 +105,8 @@ export const store = configureStore({
       .concat(authApi.middleware)
       .concat(rolesApi.middleware)
       .concat(companiesSlice.middleware)
+      .concat(clasificationMovementSlice.middleware)
+      .concat(movementsTypeSlice.middleware)
       // Middleware de las nuevas APIs
       .concat(getCategoriesProductsApi.middleware)
       .concat(createCategoryProductApi.middleware)
