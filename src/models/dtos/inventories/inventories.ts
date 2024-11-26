@@ -46,3 +46,8 @@ export interface InventoryMovementResponse {
     success: boolean;
     message: string;
 }
+
+export interface InventoryPDF{
+    companyName: string; 
+    departmentName: string; 
+}

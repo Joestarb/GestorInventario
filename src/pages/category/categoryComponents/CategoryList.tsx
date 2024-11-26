@@ -10,7 +10,8 @@ const CategoryList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     const orders = [
         { name: translate('categorysuppliers'), module: translate('categorysuppliers') },
         { name: translate('categoryproducts'), module: translate('categorysuppliers') },
-        { name: translate('categoryorders'), module: translate('categorysuppliers') }
+        { name: translate('categoryorders'), module: translate('categorysuppliers') },
+        { name: translate('company'), module: translate('system') }
     ];
     const headers:any = ['name', 'module'] as const;
 

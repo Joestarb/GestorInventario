@@ -15,7 +15,7 @@ import Landing from './pages/landing/Landing';
 import Category from './pages/category/Category';
 import CategoryDetails from './pages/category/categoryComponents/CategoryDetails';
 import Errors from './pages/errors/Errors';
-import ProtectedRoute from './Routes/ProtectedRoute.tsx'; // Importa el componente
+import { PublicRoute, ProtectedRoute } from './Routes/ProtectedRoute';
 
 const Layout: React.FC = () => {
     return (
@@ -31,9 +31,13 @@ const App: React.FC = () => {
     return (
         <BrowserRouter>
             <Routes>
-                {/* Rutas públicas */}
-                <Route path="/login" element={<Login />} />
-                <Route path="/" element={<Landing />} />
+                {/* Rutas públicas protegidas */}
+                <Route element={<PublicRoute />}>
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<Landing />} />
+                </Route>
+
+                {/* Ruta de errores accesible siempre */}
                 <Route path="*" element={<Errors />} />
 
                 {/* Rutas protegidas */}
@@ -55,7 +59,7 @@ const App: React.FC = () => {
                 <Route element={<ProtectedRoute roleRequired="Administrator" />}>
                     <Route element={<Layout />}>
                         <Route path="/category" element={<Category />} />
-                        <Route path="/category/:categoryName" element={<CategoryDetails isDarkMode={false} />} />
+                        <Route path="/category/:categoryName" element={<CategoryDetails/>} />
                     </Route>
                 </Route>
             </Routes>

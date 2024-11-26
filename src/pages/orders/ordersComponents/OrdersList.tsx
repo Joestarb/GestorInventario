@@ -9,17 +9,18 @@ import Input from '../../../components/Input';
 const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedValue, setSelectedValue] = useState('');
+    const user = JSON.parse(localStorage.getItem('userToken') || '{}');
 
     const orders = [
-        { product: 'Maggi', ordervalue: '₹4306', quantity: '43 Packets', orderid: '225', expecteddelivery: '2025-12-30', status: 'Delayed',     },
-        { product: 'Bru', ordervalue: '₹2557', quantity: '22 Packets', orderid: '10', expecteddelivery: '2025-08-20', status: 'Confirmed',    },
-        { product: 'Red Bull', ordervalue: '₹4075', quantity: '36 Packets', orderid: '751', expecteddelivery: '2025-07-10', status: 'Returned',     },
-        { product: 'Bourn Vita', ordervalue: '₹5052', quantity: '14 Packets', orderid: '50', expecteddelivery: '2025-06-15',  status: 'Out for delivery',    },
-        { product: 'Horlicks', ordervalue: '₹5370', quantity: '5 Packets', orderid: '225', expecteddelivery: '2025-12-30', status: 'Returned',     },
-        { product: 'Harpic', ordervalue: '₹6065', quantity: '10 Packets', orderid: '100', expecteddelivery: '2025-08-20', status: 'Out for delivery',    },
-        { product: 'Ariel', ordervalue: '₹4078', quantity: '23 Packets', orderid: '75', expecteddelivery: '2025-07-10', status: 'Delayed',     },
-        { product: 'Scotch Brite', ordervalue: '₹3559', quantity: '43 Packets', orderid: '5070', expecteddelivery: '2025-06-15',  status: 'Confirmed',    },
-        { product: 'Coca cola', ordervalue: '₹2055', quantity: '41 Packets', orderid: '50', expecteddelivery: '2025-06-15',  status: 'Delayed',    }
+        { product: 'Maggi', ordervalue: '₹4306', quantity: '43 Packets', orderid: '225', expecteddelivery: '2025-12-30', status: 'Delayed', },
+        { product: 'Bru', ordervalue: '₹2557', quantity: '22 Packets', orderid: '10', expecteddelivery: '2025-08-20', status: 'Confirmed', },
+        { product: 'Red Bull', ordervalue: '₹4075', quantity: '36 Packets', orderid: '751', expecteddelivery: '2025-07-10', status: 'Returned', },
+        { product: 'Bourn Vita', ordervalue: '₹5052', quantity: '14 Packets', orderid: '50', expecteddelivery: '2025-06-15', status: 'Out for delivery', },
+        { product: 'Horlicks', ordervalue: '₹5370', quantity: '5 Packets', orderid: '225', expecteddelivery: '2025-12-30', status: 'Returned', },
+        { product: 'Harpic', ordervalue: '₹6065', quantity: '10 Packets', orderid: '100', expecteddelivery: '2025-08-20', status: 'Out for delivery', },
+        { product: 'Ariel', ordervalue: '₹4078', quantity: '23 Packets', orderid: '75', expecteddelivery: '2025-07-10', status: 'Delayed', },
+        { product: 'Scotch Brite', ordervalue: '₹3559', quantity: '43 Packets', orderid: '5070', expecteddelivery: '2025-06-15', status: 'Confirmed', },
+        { product: 'Coca cola', ordervalue: '₹2055', quantity: '41 Packets', orderid: '50', expecteddelivery: '2025-06-15', status: 'Delayed', }
     ];
     const headers = [...(['product', 'ordervalue', 'quantity', 'orderid', 'expecteddelivery', 'status'] as const)];
 
@@ -40,32 +41,34 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
         { value: 'option3', label: 'Opción 3' },
     ];
 
-    return(
+    return (
         <>
             <WhiteCard
                 title='Orders'
                 isDarkMode={isDarkMode}
                 children={
                     <>
-                        <div className=' flex  w-full justify-end gap-8'>
-                            <Button
-                                onClick={() => setIsModalOpen(true)}
-                                children={
-                                    <p>Add Order</p>
-                                } 
-                            />
-                            <Select
-                                options={options}
-                                value={selectedValue}
-                                onChange={setSelectedValue}
-                                placeholder="Filters"
-                            />
-                            <Button
-                                children={
-                                    <p>Order history</p>
-                                }
-                            />
-                        </div>
+                        {user.role === 'Administrator' && (
+                            <div className=' flex  w-full justify-end gap-8'>
+                                <Button
+                                    onClick={() => setIsModalOpen(true)}
+                                    children={
+                                        <p>Add Order</p>
+                                    }
+                                />
+                                <Select
+                                    options={options}
+                                    value={selectedValue}
+                                    onChange={setSelectedValue}
+                                    placeholder="Filters"
+                                />
+                                <Button
+                                    children={
+                                        <p>Order history</p>
+                                    }
+                                />
+                            </div>
+                        )}
 
                         <Modal
                             isOpen={isModalOpen}
@@ -87,7 +90,7 @@ const OrdersList: React.FC<{ isDarkMode: boolean }> = ({ isDarkMode }) => {
                             </div>
                         </Modal>
                         <div className='overflow-auto'>
-                            <DynamicTable  data={orders} headers={headers}/>
+                            <DynamicTable data={orders} headers={headers} />
                         </div>
                     </>
                 }
