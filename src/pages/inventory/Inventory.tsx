@@ -190,8 +190,7 @@ const Inventory: React.FC = () => {
     };
 
     return (
-    <div className=' py-6 px-4'>
-      <OverhallInventory isDarkMode={isDarkMode} />
+    <div className=' py-6 h-screen px-4'>
       <br />
         <Products
             isDarkMode={isDarkMode}

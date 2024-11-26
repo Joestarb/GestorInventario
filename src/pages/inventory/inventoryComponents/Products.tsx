@@ -115,7 +115,7 @@ const Products: React.FC<ProductsProps> = ({
                 className="bg-amber-500 hover:bg-amber-800 font-semibold text-sm"
             >
                 {translate('details')}
-            </Button>
+            </Button> 
         </div>
     );
 
@@ -124,6 +124,7 @@ const Products: React.FC<ProductsProps> = ({
             <WhiteCard
                 title="Products"
                 isDarkMode={isDarkMode}
+                className=' h-screen'
                 children={
                     <>
                         {user.role != 'User' && (

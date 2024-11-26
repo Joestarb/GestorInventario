@@ -130,14 +130,7 @@ const GetSuppliers: React.FC<GetSuppliersProps> = ({ isDarkMode, suppliers }) =>
                         >
                             Edit
                         </Button>
-                        <Link to={`/suppliers/details/${supplier.id_supplier}`}>
-                            <Button
-                                className={` bg-yellow-600 hover:bg-yellow-500 ${isDarkMode ? "text-gray-100" : "text-gray-800"}`}
-                                type="button"
-                            >
-                                Details
-                            </Button>
-                        </Link>
+                      
                         <Button
                             className={` bg-red-600 hover:bg-red-500 hover:text-white transition-colors ${isDarkMode ? "text-gray-100" : "text-gray-800"}`}
                             type="button"
