@@ -19,7 +19,7 @@ const Errors: React.FC = () => {
                         <div className="text-lg mb-8 sm:text-center lg:text-start">
                             Parece que algo salió mal. Tal vez escribiste mal la dirección o la página ya no está aquí.
                         </div>
-                        <Link to="/dashboard">
+                        <Link to="/inventory">
                             <a className={`border border-blue-500 rounded p-4 ${isDarkMode ? ' hover:bg-white hover:text-black' : 'hover:bg-black hover:text-white'}`}>Regresar</a>
                         </Link>
                     </div>

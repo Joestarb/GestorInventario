@@ -17,8 +17,8 @@ const Inventory: React.FC = () => {
     const [selectedProduct, setSelectedProduct] = useState<InventoryProduct | null>(null);
 
     const { translate } = useLanguage();
-    const {isDarkMode} = useTheme()
-    const { data: inventories = [], isLoading, error } = useGetInventoriesQuery();
+    const { isDarkMode } = useTheme()
+    const { data: inventories = [], isLoading, error, refetch } = useGetInventoriesQuery();
     const [createInventoryProduct] = useCreateInventoryProductMutation();
     const [updateInventoryProduct] = useUpdateInventoryProductMutation();
     const [deleteInventoryProduct] = useDeleteInventoryProductMutation(); // Hook de eliminación
@@ -59,7 +59,7 @@ const Inventory: React.FC = () => {
         id_department_Id: 0,
         id_module_Id: 1,
         id_company_Id: 1,
-        id_user_Id:1
+        id_user_Id: 1
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -105,66 +105,64 @@ const Inventory: React.FC = () => {
                 confirmButtonText: 'Sí, eliminar',
                 cancelButtonText: 'Cancelar',
             });
-    
+
             if (result.isConfirmed) {
                 await deleteInventoryProduct(id).unwrap(); // Llama al endpoint para eliminar
                 console.log(`Producto con ID ${id} eliminado.`);
-    
+
                 Swal.fire(
                     '¡Eliminado!',
                     'El producto ha sido eliminado.',
                     'success'
                 );
-                setTimeout(() => {
-                    window.location.reload();
-                  }, 1000);
             }
         } catch (error) {
             console.error("Error al eliminar el producto:", error);
-    
+
             Swal.fire(
                 'Error',
                 'No se pudo eliminar el producto.',
                 'error'
             );
         }
-        
+        refetch();
+
 
     };
-    
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-    
+
         try {
             if (editMode && selectedProduct) {
                 await updateInventoryProduct({
                     id: selectedProduct.id_inventory_product,
                     data: formData,
                 }).unwrap();
-    
+
                 Swal.fire(
                     '¡Actualizado!',
                     'El producto ha sido actualizado correctamente.',
                     'success'
                 );
-                setTimeout(() => {
-                    window.location.reload();
-                  }, 1000);
             } else {
                 await createInventoryProduct(formData).unwrap();
-    
+
                 Swal.fire(
                     '¡Creado!',
                     'El producto ha sido creado exitosamente.',
                     'success'
                 );
             }
-    
+
             setIsModalOpen(false);
             resetForm();
+
+            // Refresca los datos de inventarios
+            refetch();
         } catch (error) {
             console.error("Error al guardar el producto:", error);
-    
+
             Swal.fire(
                 'Error',
                 'No se pudo guardar el producto.',
@@ -172,6 +170,7 @@ const Inventory: React.FC = () => {
             );
         }
     };
+
 
     const resetForm = () => {
         setFormData({
@@ -185,40 +184,40 @@ const Inventory: React.FC = () => {
             id_department_Id: 0,
             id_module_Id: 1,
             id_company_Id: 1,
-            id_user_Id:1,
+            id_user_Id: 1,
         });
     };
 
     return (
-    <div className=' py-6 h-screen px-4'>
-      <br />
-        <Products
-            isDarkMode={isDarkMode}
-            inventories={inventories}
-            isLoading={isLoading}
-            error={error}
-            createInventoryProduct={createInventoryProduct}
-            updateInventoryProduct={updateInventoryProduct}
-            deleteInventoryProduct={deleteInventoryProduct}
-            handleEdit={handleEdit}
-            handleDelete={handleDelete}
-            formData={formData}
-            setFormData={setFormData}
-            headers={headers}
-            inputFields={inputFields}
-            editMode={editMode}
-            selectedProduct={selectedProduct}
-            resetForm={resetForm}
-            setIsModalOpen={setIsModalOpen}
-            handleSubmit={handleSubmit}
-            handleChange={handleChange}
-            isModalOpen={isModalOpen}
-            selectedValue={selectedValue}
-            setSelectedValue={setSelectedValue}
-            setEditMode={setEditMode}
-        />
-    </div>
-  )
+        <div className=' py-6 h-screen px-4'>
+            <br />
+            <Products
+                isDarkMode={isDarkMode}
+                inventories={inventories}
+                isLoading={isLoading}
+                error={error}
+                createInventoryProduct={createInventoryProduct}
+                updateInventoryProduct={updateInventoryProduct}
+                deleteInventoryProduct={deleteInventoryProduct}
+                handleEdit={handleEdit}
+                handleDelete={handleDelete}
+                formData={formData}
+                setFormData={setFormData}
+                headers={headers}
+                inputFields={inputFields}
+                editMode={editMode}
+                selectedProduct={selectedProduct}
+                resetForm={resetForm}
+                setIsModalOpen={setIsModalOpen}
+                handleSubmit={handleSubmit}
+                handleChange={handleChange}
+                isModalOpen={isModalOpen}
+                selectedValue={selectedValue}
+                setSelectedValue={setSelectedValue}
+                setEditMode={setEditMode}
+            />
+        </div>
+    )
 }
 
 export default Inventory

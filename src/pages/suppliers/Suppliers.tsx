@@ -122,13 +122,6 @@ const Suppliers: React.FC = () => {
                             >
                                 Add Supplier
                             </Button>
-                            <button
-                                className={`flex items-center space-x-2 bg-transparent text-xs sm:text-sm border border-gray-200 font-bold p-2 rounded ${isDarkMode ? 'text-white' : 'text-black'}`}
-                                type="button"
-                            >
-                                <IoFilter className="mr-1" />
-                                Filters
-                            </button>
                         </div>
                     )
                 }

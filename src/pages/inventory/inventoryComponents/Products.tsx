@@ -110,12 +110,6 @@ const Products: React.FC<ProductsProps> = ({
             >
                 {translate('delete')}
             </Button>
-            <Button
-                onClick={() => console.log('Details clicked')}
-                className="bg-amber-500 hover:bg-amber-800 font-semibold text-sm"
-            >
-                {translate('details')}
-            </Button> 
         </div>
     );
 
@@ -138,12 +132,6 @@ const Products: React.FC<ProductsProps> = ({
                                 <Button onClick={handleDownloadPDF} className="bg-green-500 hover:bg-green-700">
                                     {isFetching ? 'Generating PDF...' : 'Download Inventory PDF'}
                                 </Button>
-                                <Select
-                                    options={[{ value: '', label: 'All' }]}
-                                    value={selectedValue}
-                                    onChange={setSelectedValue}
-                                    placeholder="Filters"
-                                />
                             </div>
                         )}
 

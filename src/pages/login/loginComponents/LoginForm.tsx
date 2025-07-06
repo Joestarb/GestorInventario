@@ -31,7 +31,7 @@ const LoginForm: React.FC = () => {
                 confirmButtonText: translate('access'),
             }).then(() => {
                 // Redirige al usuario al dashboard
-                navigate('/dashboard');
+                navigate('/inventory');
             });
 
         } catch (err) {
